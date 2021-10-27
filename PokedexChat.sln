@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokedexChat", "PokedexChat\PokedexChat.csproj", "{203C6116-875A-40E1-AE3F-ED55E7D08792}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor", "Blazor\Blazor.csproj", "{203C6116-875A-40E1-AE3F-ED55E7D08792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{A3F7A5F1-8D98-4DC3-9A79-A5269A0968A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{203C6116-875A-40E1-AE3F-ED55E7D08792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{203C6116-875A-40E1-AE3F-ED55E7D08792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{203C6116-875A-40E1-AE3F-ED55E7D08792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F7A5F1-8D98-4DC3-9A79-A5269A0968A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F7A5F1-8D98-4DC3-9A79-A5269A0968A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F7A5F1-8D98-4DC3-9A79-A5269A0968A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F7A5F1-8D98-4DC3-9A79-A5269A0968A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

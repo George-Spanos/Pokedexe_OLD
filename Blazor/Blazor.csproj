@@ -4,6 +4,7 @@
     </Target>
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>PokedexChat</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
