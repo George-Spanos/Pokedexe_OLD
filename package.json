@@ -1,0 +1,19 @@
+{
+  "name": "pokedexchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "devDependencies": {
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.1",
+    "tailwindcss": "^2.2.17"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "buildcss": "postcss PokedexChat/wwwroot/css/app.css -o PokedexChat/wwwroot/css/app.min.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
