@@ -705,16 +705,6 @@ video {
   transition-duration: 200ms;
 }
 
-body {
-  min-height: 100vh;
-}
-
-#app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 @media (min-width: 480px) {
 }
 
@@ -725,4 +715,57 @@ body {
 }
 
 @media (min-width: 1440px) {
+}
+
+body {
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  border-radius: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.btn-blue {
+  --tw-bg-opacity: 1;
+  background-color: rgba(14, 165, 233, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.btn-blue:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(3, 105, 161, var(--tw-bg-opacity));
+}
+
+.btn-pink {
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(245, 208, 254, var(--tw-bg-opacity))
+}
+
+.btn-pink:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(232, 121, 249, var(--tw-bg-opacity));
+}
+
+.btn-pink {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 200ms;
 }

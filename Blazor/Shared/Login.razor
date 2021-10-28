@@ -1,0 +1,11 @@
+﻿<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity?.Name!
+        <button class="btn-pink" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a class="btn-pink" href="authentication/login">Login</a>
+    </NotAuthorized>
+</AuthorizeView>
