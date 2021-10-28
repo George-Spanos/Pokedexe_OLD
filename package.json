@@ -12,7 +12,7 @@
   "dependencies": {
   },
   "scripts": {
-    "buildcss": "postcss PokedexChat/wwwroot/css/app.css -o PokedexChat/wwwroot/css/app.min.css"
+    "buildcss": "postcss Blazor/wwwroot/css/app.css -o Blazor/wwwroot/css/app.min.css"
   },
   "author": "",
   "license": "ISC"
