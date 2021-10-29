@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using PokedexChat.Extensions;
 namespace PokedexChat.Data {
-    public class MessageService : IMessageService {
+    internal sealed class MessageService : IMessageService {
         private readonly List<Message> _messages = new();
-
-        private IEnumerable<Message> Messages => _messages;
 
         public void SendMessage(Message message)
         {
             Console.WriteLine($"{message.User.Name} wrote {message.Text}");
         }
-        public IReadOnlyList<IReadOnlyList<Message>> GetMessages()
+        public IReadOnlyCollection<IReadOnlyCollection<Message>> GetMessages()
         {
             var user = new User("George Spanos", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcs3igV0QK_ErQ4ub7yNUsBbiv9-YS0Lj4A&usqp=CAU");
             for (var i = 0; i < 10; i++){
@@ -19,9 +19,10 @@ namespace PokedexChat.Data {
                 _messages.Add(newMessage);
             }
             return _messages
-                .GroupBy(message => message.User.Name)
-                .Select(grp => grp.ToList())
-                .ToList();
+                .GroupWhile((previous, next) => previous.User.Name == next.User.Name)
+                .Select(group => group.ToList().AsReadOnly())
+                .ToList().AsReadOnly();
+
         }
     }
 }

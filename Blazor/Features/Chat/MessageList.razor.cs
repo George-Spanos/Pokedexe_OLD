@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,7 +17,7 @@ namespace PokedexChat.Features.Chat {
         [Inject]
         private IMessageService MessageService { get; set; }
 
-        protected IReadOnlyList<IReadOnlyList<Message>> Messages { get; set; }
+        protected IReadOnlyCollection<IReadOnlyCollection<Message>> Messages { get; set; }
 
         protected override void OnInitialized()
         {

@@ -675,10 +675,6 @@ video {
   flex-direction: column;
 }
 
-.items-start{
-  align-items: flex-start;
-}
-
 .items-center{
   align-items: center;
 }
@@ -697,6 +693,10 @@ video {
 
 .gap-4{
   gap: 1rem;
+}
+
+.gap-y-2{
+  row-gap: 0.5rem;
 }
 
 .gap-y-4{
@@ -869,19 +869,15 @@ body {
 }
 
 .message {
-  span {
-  }
-  grid-column: 1 / -1;
-  grid-column-start: 2;
   display: inline-flex;
-  align-items: center;
-  border-radius: 0.25rem;
+  overflow-wrap: break-word;
+  border-radius: 2rem;
   border-width: 2px;
   border-style: solid;
   --tw-border-opacity: 1;
   border-color: rgba(245, 208, 254, var(--tw-border-opacity));
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);

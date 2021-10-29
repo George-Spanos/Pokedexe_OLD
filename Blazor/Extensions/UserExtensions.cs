@@ -4,7 +4,7 @@ using System.Security.Claims;
 using PokedexChat.Data;
 namespace PokedexChat.Extensions {
     public static class UserExtensions {
-        public static User ToAppUser(this ClaimsPrincipal user)
+        public static IUser ToAppUser(this ClaimsPrincipal user)
         {
             var name = user.Identity?.Name;
             Console.WriteLine("User claims are");
