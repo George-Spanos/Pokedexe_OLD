@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
 namespace PokedexChat.Data {
     public class Message : IMessage {
         public IUser User { get; set; }

@@ -1,7 +1,7 @@
 ﻿@inherits MessageListBase;
 
 <div class="flex flex-col gap-3 flex-grow">
-    @foreach (var message in Messages){
-        <MessageBubble Message=@message/>
+    @foreach (var userMessagesBubble in Messages){
+        <MessageBubble Messages=@userMessagesBubble User="@userMessagesBubble.First().User"/>
     }
 </div>

@@ -845,6 +845,8 @@ body {
 }
 
 .message {
+  span {
+  }
   grid-column: 1 / -1;
   grid-column-start: 2;
   display: inline-flex;
