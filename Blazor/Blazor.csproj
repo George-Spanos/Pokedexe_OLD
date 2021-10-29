@@ -18,11 +18,15 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
       <_ContentIncludedByDefault Remove="wwwroot\icons\profile.svg" />
+      <_ContentIncludedByDefault Remove="Shared\Icons\UserCircle.razor" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Shared\Login.cs">
-        <DependentUpon>Login.razor</DependentUpon>
+      <Compile Update="Shared\LoadingBase.cs">
+        <DependentUpon>Loading.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Chat\Message.razor.cs">
+        <DependentUpon>Message.razor</DependentUpon>
       </Compile>
     </ItemGroup>
 
