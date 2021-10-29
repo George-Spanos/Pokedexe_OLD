@@ -2,7 +2,8 @@
 @using Microsoft.AspNetCore.Authorization
 @inherits ChatBase;
 @attribute [Authorize]
-<div class="flex flex-col flex-grow">
+
+<div class="flex flex-col flex-grow gap-y-4">
     <MessageList/>
     <NewMessage/>
 </div>

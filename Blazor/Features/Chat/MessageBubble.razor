@@ -1,0 +1,7 @@
+﻿@inherits MessageBubbleBase;
+<div class="grid grid-cols-6 lg:grid-cols-13 gap-1">
+    <img class="rounded-full border-2 border-blue-400 p-1 col-span-1" width="50" src="@Message.User.PictureUrl" alt="@Message.User.Name"/>
+    <span class="message">@((string)Message)</span>
+    <span class="text-sm text-gray-400 col-span-1">@Message.User.Firstname</span>
+    <span class="text-xs text-gray-400 col-start-2 col-span-full text-right">@Message.Timestamp</span>
+</div>

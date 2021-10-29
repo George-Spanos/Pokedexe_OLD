@@ -1,0 +1,33 @@
+@use "reset.css";
+@use "loader.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
+
+
+body {
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+    @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+    @apply bg-blue-700;
+}
+.btn-pink {
+   @apply rounded py-2 px-3 hover:bg-pink-400 bg-pink-200 transition-all duration-200
+}
+.message {
+    @apply inline-flex col-start-2 col-span-full items-center px-3 py-2 border-2 border-pink-200 border-solid shadow-xl rounded;
+}

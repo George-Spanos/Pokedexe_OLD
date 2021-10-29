@@ -2,9 +2,11 @@
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="npm run buildcss" />
     </Target>
+  
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>PokedexChat</RootNamespace>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,6 +21,7 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
       <_ContentIncludedByDefault Remove="wwwroot\icons\profile.svg" />
       <_ContentIncludedByDefault Remove="Shared\Icons\UserCircle.razor" />
+      <_ContentIncludedByDefault Remove="Authentication\Authentication.razor" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +30,24 @@
       </Compile>
       <Compile Update="Chat\Message.razor.cs">
         <DependentUpon>Message.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Data\User.cs">
+        <DependentUpon>IUser.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Data\MessageService.cs">
+        <DependentUpon>IMessageService.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Features\Chat\NewMessageForm.cs">
+        <DependentUpon>NewMessage.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Data\Message.cs">
+        <DependentUpon>IMessage.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Features\Chat\MessageBubble.cs">
+        <DependentUpon>MessageBubble.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Shared\Auth\Login.cs">
+        <DependentUpon>Login.razor</DependentUpon>
       </Compile>
     </ItemGroup>
 
@@ -37,6 +58,10 @@
       <Content Update="wwwroot\appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features" />
     </ItemGroup>
 
 </Project>

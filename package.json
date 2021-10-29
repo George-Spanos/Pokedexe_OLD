@@ -12,7 +12,7 @@
   "dependencies": {
   },
   "scripts": {
-    "buildcss": "postcss Blazor/wwwroot/css/app.css -o Blazor/wwwroot/css/app.min.css"
+    "buildcss": "postcss Blazor/wwwroot/css/app.scss -o Blazor/wwwroot/css/app.min.css"
   },
   "author": "",
   "license": "ISC"

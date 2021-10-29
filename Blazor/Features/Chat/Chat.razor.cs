@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-namespace PokedexChat.Chat {
+namespace PokedexChat.Features.Chat {
     public class ChatBase:ComponentBase {
         
     }
