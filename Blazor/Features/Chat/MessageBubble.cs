@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Immutable;
 using Microsoft.AspNetCore.Components;
-using Model;
-using PokedexChat.Data;
+using Model.Proto;
 namespace PokedexChat.Features.Chat {
     public class MessageBubbleBase : ComponentBase {
         [Parameter]
-        public IReadOnlyCollection<Message> Messages{ get; set; }
+        public ImmutableList<Message> Messages{ get; set; }
         [Parameter]
-        public IUser User { get; set; }
+        public User User { get; set; }
     }
 }

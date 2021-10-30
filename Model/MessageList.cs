@@ -2,28 +2,30 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Model.Extensions;
+using Model.Proto;
+
 namespace Model {
-    public partial class MessageList {
-        private readonly IEnumerable<IMessage> _messages;
+    public class MessageList {
+        private readonly IEnumerable<Message> _messages;
 
         public ImmutableList<ImmutableList<Message>> Value => _messages
             .GroupWhile((previous, next) => previous.User.Name == next.User.Name)
             .Select(group => {
-                return group.Select(message => new Message(message.User, message.Text, message.Timestamp)).ToImmutableList();
+                return group.Select(message => new Message(message)).ToImmutableList();
             })
             .ToImmutableList();
 
-        private MessageList(IEnumerable<IMessage> messages)
+        private MessageList(IEnumerable<Message> messages)
         {
             _messages = messages.ToList().AsReadOnly();
         }
-        public static MessageList Create(IEnumerable<IMessage> messages)
+        public static MessageList Create(IEnumerable<Message> messages)
         {
             return new MessageList(messages);
         }
         public static MessageList CreateEmpty()
         {
-            return new MessageList(new List<IMessage>());
+            return new MessageList(new List<Message>());
         }
         public MessageList Add(Message message)
         {

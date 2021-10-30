@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Model;
+using Model.Proto;
 namespace PokedexChat.Data {
     public interface IMessageService {
         public void BroadcastMessage(Message message);
-        public Task<MessageList> GetMessages();
-        public Task<IMessage> GetNewMessage();
+        public Task<Model.MessageList> GetMessages();
+        public Task<Message> GetNewMessage();
     }
 
 }

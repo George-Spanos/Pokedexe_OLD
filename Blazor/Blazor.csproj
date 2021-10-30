@@ -41,9 +41,6 @@
       <Compile Update="Chat\Message.razor.cs">
         <DependentUpon>Message.razor</DependentUpon>
       </Compile>
-      <Compile Update="Data\MessageService.cs">
-        <DependentUpon>IMessageService.cs</DependentUpon>
-      </Compile>
       <Compile Update="Features\Chat\NewMessageForm.cs">
         <DependentUpon>NewMessage.razor</DependentUpon>
       </Compile>
@@ -52,6 +49,9 @@
       </Compile>
       <Compile Update="Shared\Auth\Login.cs">
         <DependentUpon>Login.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Data\MessageService.cs">
+        <DependentUpon>IMessageService.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

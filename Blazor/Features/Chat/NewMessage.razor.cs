@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Model;
-using PokedexChat.Data;
 using Model.Extensions;
-
+using Model.Proto;
+using PokedexChat.Data;
 namespace PokedexChat.Features.Chat {
 
     public class NewMessageBase : ComponentBase {
@@ -18,7 +18,17 @@ namespace PokedexChat.Features.Chat {
         protected readonly NewMessageForm NewMessageForm = new();
         protected async void Submit()
         {
-            var message = new Message((await AuthenticationState).User.ToAppUser(), NewMessageForm.Text, DateTime.Now);
+            var user = (await AuthenticationState).User.ToAppUser();
+            var message = new Message()
+            {
+                Text = NewMessageForm.Text,
+                Timestamp = Timestamp.FromDateTime(DateTime.Now),
+                User = new User()
+                {
+                    Name = user.Name,
+                    PictureUrl = user.PictureUrl
+                }
+            };
             MessageService.BroadcastMessage(message);
         }
     }

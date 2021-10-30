@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using Model.Proto;
 namespace Model.Extensions {
     public static class UserExtensions {
-        public static IUser ToAppUser(this ClaimsPrincipal user)
+        public static User ToAppUser(this ClaimsPrincipal user)
         {
             var name = user.Identity?.Name;
             Console.WriteLine("User claims are");
@@ -11,7 +12,12 @@ namespace Model.Extensions {
                 Console.WriteLine($"{claim.Type} - {claim.Value}");
             }
             var pictureUrl = user.Claims.Single(claim => claim.Type == "picture").Value;
-            return new User(name, pictureUrl);
+            var newUser = new User
+            {
+                Name = name,
+                PictureUrl = pictureUrl
+            };
+            return newUser;
         }
     }
 }
