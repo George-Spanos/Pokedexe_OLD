@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Model;
 using PokedexChat.Data;
-using PokedexChat.Extensions;
+using Model.Extensions;
 
 namespace PokedexChat.Features.Chat {
 

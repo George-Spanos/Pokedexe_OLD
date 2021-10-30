@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PokedexChat.Extensions {
+namespace Model.Extensions {
     public static class DateExtensions {
         public static string MessageFormat(this DateTime date)
         {

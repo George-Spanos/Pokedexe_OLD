@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using PokedexChat.Data;
-namespace PokedexChat.Extensions {
+namespace Model.Extensions {
     public static class UserExtensions {
         public static IUser ToAppUser(this ClaimsPrincipal user)
         {

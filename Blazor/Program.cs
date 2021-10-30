@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PokedexChat.Data;
+
 namespace PokedexChat {
     public class Program {
         public static async Task Main(string[] args)

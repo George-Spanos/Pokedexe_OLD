@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using Model;
 using PokedexChat.Extensions;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
@@ -21,6 +22,10 @@ namespace PokedexChat.Data {
             }
             return Task.FromResult(MessageList.Create(_messages));
 
+        }
+        public Task<IMessage> GetNewMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

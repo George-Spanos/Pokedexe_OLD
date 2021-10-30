@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace PokedexChat.Extensions {
-    public static class IEnumerableExtensions {
+namespace Model.Extensions {
+    public static class EnumerableExtensions {
         public static IEnumerable<IEnumerable<T>> GroupWhile<T>(this IEnumerable<T> seq, Func<T,T,bool> condition)
         {
             var enumerable = seq as T[] ?? seq.ToArray();

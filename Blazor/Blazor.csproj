@@ -31,17 +31,11 @@
       <Compile Update="Chat\Message.razor.cs">
         <DependentUpon>Message.razor</DependentUpon>
       </Compile>
-      <Compile Update="Data\User.cs">
-        <DependentUpon>IUser.cs</DependentUpon>
-      </Compile>
       <Compile Update="Data\MessageService.cs">
         <DependentUpon>IMessageService.cs</DependentUpon>
       </Compile>
       <Compile Update="Features\Chat\NewMessageForm.cs">
         <DependentUpon>NewMessage.razor</DependentUpon>
-      </Compile>
-      <Compile Update="Data\Message.cs">
-        <DependentUpon>IMessage.cs</DependentUpon>
       </Compile>
       <Compile Update="Features\Chat\MessageBubble.cs">
         <DependentUpon>MessageBubble.razor</DependentUpon>
@@ -62,6 +56,10 @@
 
     <ItemGroup>
       <Folder Include="Features" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
 </Project>

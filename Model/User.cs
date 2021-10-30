@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-namespace PokedexChat.Data {
-    internal sealed class User : RemoteUserAccount, IUser {
+﻿namespace Model {
+    public sealed class User : IUser {
         public string Name { get; set; }
 
         public string PictureUrl { get; set; }

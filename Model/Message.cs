@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PokedexChat.Data {
+namespace Model {
     public class Message : IMessage {
         public IUser User { get; set; }
 

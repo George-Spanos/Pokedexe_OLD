@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-namespace PokedexChat.Data {
+namespace Model {
     public interface IUser {
         string Name { get; set; }
 

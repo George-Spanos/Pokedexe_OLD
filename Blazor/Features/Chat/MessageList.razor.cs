@@ -17,7 +17,7 @@ namespace PokedexChat.Features.Chat {
         [Inject]
         private IMessageService MessageService { get; set; }
 
-        protected Data.MessageList Messages { get; set; }
+        protected Model.MessageList Messages { get; set; }
 
         protected override void OnInitialized()
         {

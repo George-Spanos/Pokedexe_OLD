@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using PokedexChat.Extensions;
-namespace PokedexChat.Data {
+using Model.Extensions;
+namespace Model {
     public class MessageList {
         private readonly IEnumerable<IMessage> _messages;
 
@@ -20,6 +20,10 @@ namespace PokedexChat.Data {
         public static MessageList Create(IEnumerable<IMessage> messages)
         {
             return new MessageList(messages);
+        }
+        public MessageList Add(Message message)
+        {
+            return Create(_messages.Append(message));
         }
     }
 }
