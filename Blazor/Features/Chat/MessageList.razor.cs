@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
+using Model;
 using PokedexChat.Data;
 namespace PokedexChat.Features.Chat {
 
@@ -19,9 +20,9 @@ namespace PokedexChat.Features.Chat {
 
         protected Model.MessageList Messages { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            Messages = MessageService.GetMessages().Result;
+            Messages = await MessageService.GetMessages();
         }
         protected override async void OnAfterRender(bool firstRender)
         {

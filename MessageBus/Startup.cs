@@ -16,6 +16,14 @@ namespace MessageBus {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddHttpClient();
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,9 +34,11 @@ namespace MessageBus {
             }
 
             app.UseRouting();
-
+            app.UseHttpsRedirection();
+            app.UseGrpcWeb();
+            app.UseCors();
             app.UseEndpoints(endpoints => {
-                endpoints.MapGrpcService<MessageService>();
+                endpoints.MapGrpcService<MessageService>().EnableGrpcWeb().RequireCors("AllowAll");
 
                 endpoints.MapGet("/",
                 async context => {

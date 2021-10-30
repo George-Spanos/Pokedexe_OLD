@@ -11,15 +11,17 @@ using Proto=Model.Proto;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
 
-        private GrpcChannel channel;
-        private Proto.MessageService.MessageServiceClient _client;
+        private readonly GrpcChannel channel;
+        private readonly Proto.MessageService.MessageServiceClient _client;
         private readonly List<Message> _messages = new();
         public MessageService()
         {
+            var httpHandler = new HttpClientHandler();
+            
             channel = GrpcChannel.ForAddress("https://localhost:8080",
             new GrpcChannelOptions
             {
-                HttpHandler = new GrpcWebHandler(new HttpClientHandler())
+                HttpHandler = new GrpcWebHandler(httpHandler)
             });
             _client = new Proto.MessageService.MessageServiceClient(channel);
         }
@@ -27,11 +29,11 @@ namespace PokedexChat.Data {
         {
             Console.WriteLine($"{message.User.Name} wrote {message.Text}");
         }
-        public Task<MessageList> GetMessages()
+        public async Task<MessageList> GetMessages()
         {
-            var response = _client.GetMessages(new Proto.EMPTY());
-            return Task.FromResult(MessageList
-                .Create(response.Messages.Select(m => new Message(new User(m.User.Name, m.User.PictureUrl), m.Text, m.Timestamp.ToDateTime()))));
+            var response = await _client.GetMessagesAsync(new Proto.EMPTY());
+            return MessageList.Create(response.Messages
+                .Select(m => new Message(new User(m.Username, m.Picture), m.Text, DateTime.Parse(m.Timestamp))));
 
         }
         public Task<IMessage> GetNewMessage()

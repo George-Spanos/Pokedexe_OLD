@@ -18,10 +18,9 @@ namespace MessageBus.Services {
             _logger = logger;
             _http = http;
         }
-        public override async Task<MessageList> GetMessages(EMPTY request, IServerStreamWriter<MessageList> responseStream, ServerCallContext context)
+        public override async Task<MessageList> GetMessages(EMPTY request, ServerCallContext context)
         {
-            var response = await _http.GetAsync(MockApiUrl);
-            var messages = await response.Content.ReadFromJsonAsync<IEnumerable<Model.Proto.Message>>();
+            var messages = await _http.GetFromJsonAsync<IEnumerable<Model.Proto.Message>>(MockApiUrl);
             var messageList = new MessageList();
             messageList.Messages.Add(messages);
             return messageList;

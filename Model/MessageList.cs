@@ -21,6 +21,10 @@ namespace Model {
         {
             return new MessageList(messages);
         }
+        public static MessageList CreateEmpty()
+        {
+            return new MessageList(new List<IMessage>());
+        }
         public MessageList Add(Message message)
         {
             return Create(_messages.Append(message));
