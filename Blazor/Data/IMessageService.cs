@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace PokedexChat.Data {
     public interface IMessageService {
         public void SendMessage(Message message);
-        public IReadOnlyCollection<IReadOnlyCollection<Message>> GetMessages();
+        public Task<MessageList> GetMessages();
     }
 
 }

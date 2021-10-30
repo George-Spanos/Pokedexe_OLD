@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading.Tasks;
 using PokedexChat.Extensions;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
@@ -11,17 +12,14 @@ namespace PokedexChat.Data {
         {
             Console.WriteLine($"{message.User.Name} wrote {message.Text}");
         }
-        public IReadOnlyCollection<IReadOnlyCollection<Message>> GetMessages()
+        public Task<MessageList> GetMessages()
         {
             var user = new User("George Spanos", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcs3igV0QK_ErQ4ub7yNUsBbiv9-YS0Lj4A&usqp=CAU");
             for (var i = 0; i < 10; i++){
                 var newMessage = new Message(user, $"I sent a message {i}", DateTime.Now);
                 _messages.Add(newMessage);
             }
-            return _messages
-                .GroupWhile((previous, next) => previous.User.Name == next.User.Name)
-                .Select(group => group.ToList().AsReadOnly())
-                .ToList().AsReadOnly();
+            return Task.FromResult(MessageList.Create(_messages));
 
         }
     }

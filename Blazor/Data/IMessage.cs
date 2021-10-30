@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Security.Principal;
 namespace PokedexChat.Data {
-    internal interface IMessage {
+    public interface IMessage {
         public IUser User { get; set; }
 
         public string Text { get; set; }

@@ -17,11 +17,11 @@ namespace PokedexChat.Features.Chat {
         [Inject]
         private IMessageService MessageService { get; set; }
 
-        protected IReadOnlyCollection<IReadOnlyCollection<Message>> Messages { get; set; }
+        protected Data.MessageList Messages { get; set; }
 
         protected override void OnInitialized()
         {
-            Messages = MessageService.GetMessages();
+            Messages = MessageService.GetMessages().Result;
         }
         protected override async void OnAfterRender(bool firstRender)
         {
