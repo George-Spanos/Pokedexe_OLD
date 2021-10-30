@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using Model.Proto;
-namespace Model.Extensions {
+namespace PokedexChat.Extensions {
     public static class UserExtensions {
         public static User ToAppUser(this ClaimsPrincipal user)
         {

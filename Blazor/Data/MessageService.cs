@@ -30,8 +30,8 @@ namespace PokedexChat.Data {
         public async Task<Model.MessageList> GetMessages()
         {
             var messageResponse = await _client.GetMessagesAsync(new EMPTY());
-            IEnumerable<Message> messages = messageResponse.Messages.Select(m => new Message(m));
-            return Model.MessageList.Create(messages.ToList());
+            var messages = messageResponse.Messages.Select(m => new Message(m));
+            return Model.MessageList.Create(messages);
         }
         public Task<Message> GetNewMessage()
         {

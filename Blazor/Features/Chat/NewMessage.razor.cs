@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Model.Extensions;
 using Model.Proto;
 using PokedexChat.Data;
+using PokedexChat.Extensions;
 namespace PokedexChat.Features.Chat {
 
     public class NewMessageBase : ComponentBase {
