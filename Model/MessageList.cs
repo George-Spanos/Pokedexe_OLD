@@ -2,8 +2,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Model.Extensions;
-using Model.Proto;
-
+using Proto;
 namespace Model {
     public class MessageList {
         private readonly IEnumerable<Message> _messages;

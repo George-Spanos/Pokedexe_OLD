@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Model.Proto;
+using Proto;
+using Model;
 namespace PokedexChat.Data {
     public interface IMessageService {
         public void BroadcastMessage(Message message);
