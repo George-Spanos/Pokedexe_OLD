@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor", "Blazor\Blazor.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{F7B406BB-823A-4459-A8E8-FF41B10451BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus", "MessageBus\MessageBus.csproj", "{C723CC06-F760-4344-88B1-4A43E3FEA64E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F7B406BB-823A-4459-A8E8-FF41B10451BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7B406BB-823A-4459-A8E8-FF41B10451BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7B406BB-823A-4459-A8E8-FF41B10451BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C723CC06-F760-4344-88B1-4A43E3FEA64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C723CC06-F760-4344-88B1-4A43E3FEA64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C723CC06-F760-4344-88B1-4A43E3FEA64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C723CC06-F760-4344-88B1-4A43E3FEA64E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

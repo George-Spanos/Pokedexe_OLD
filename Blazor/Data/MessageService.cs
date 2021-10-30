@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Model;
-using PokedexChat.Extensions;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
-        private readonly List<Message> _messages = new();
 
-        public void SendMessage(Message message)
+        private GrpcChannel channel;
+        
+        private readonly List<Message> _messages = new();
+        public MessageService()
+        {
+            channel = GrpcChannel.ForAddress("https://localhost:5001",
+            new GrpcChannelOptions
+            {
+                HttpHandler = new GrpcWebHandler(new HttpClientHandler())
+            });
+            var client = Model.Message.MessageClient(channel);
+        }
+        public void BroadcastMessage(Message message)
         {
             Console.WriteLine($"{message.User.Name} wrote {message.Text}");
         }

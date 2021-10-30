@@ -19,7 +19,7 @@ namespace PokedexChat.Features.Chat {
         protected async void Submit()
         {
             var message = new Message((await AuthenticationState).User.ToAppUser(), NewMessageForm.Text, DateTime.Now);
-            MessageService.SendMessage(message);
+            MessageService.BroadcastMessage(message);
         }
     }
 }
