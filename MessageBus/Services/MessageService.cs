@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Model;
+using Model.Proto;
+using MessageList=Model.Proto.MessageList;
 namespace MessageBus.Services {
 
-    public class MessageService : Model.MessageService.MessageServiceBase {
+    public class MessageService : Model.Proto.MessageService.MessageServiceBase {
         private const string MockApiUrl = "https://617c98a31eadc500171362d5.mockapi.io/Messages";
         private readonly ILogger<MessageService> _logger;
         private readonly HttpClient _http;
@@ -16,10 +18,10 @@ namespace MessageBus.Services {
             _logger = logger;
             _http = http;
         }
-        public override async Task<MessageList> GetMessages(EMPTY request, ServerCallContext context)
+        public override async Task<MessageList> GetMessages(EMPTY request, IServerStreamWriter<MessageList> responseStream, ServerCallContext context)
         {
             var response = await _http.GetAsync(MockApiUrl);
-            var messages = await response.Content.ReadFromJsonAsync<IEnumerable<Message>>();
+            var messages = await response.Content.ReadFromJsonAsync<IEnumerable<Model.Proto.Message>>();
             var messageList = new MessageList();
             messageList.Messages.Add(messages);
             return messageList;

@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Model.Extensions;
 namespace Model {
-    public class MessageList {
+    public partial class MessageList {
         private readonly IEnumerable<IMessage> _messages;
 
         public ImmutableList<ImmutableList<Message>> Value => _messages

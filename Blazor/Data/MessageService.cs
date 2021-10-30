@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Model;
+using Proto=Model.Proto;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
 
         private GrpcChannel channel;
-        
+        private Proto.MessageService.MessageServiceClient _client;
         private readonly List<Message> _messages = new();
         public MessageService()
         {
-            channel = GrpcChannel.ForAddress("https://localhost:5001",
+            channel = GrpcChannel.ForAddress("https://localhost:8080",
             new GrpcChannelOptions
             {
                 HttpHandler = new GrpcWebHandler(new HttpClientHandler())
             });
-            var client = Model.Message.MessageClient(channel);
+            _client = new Proto.MessageService.MessageServiceClient(channel);
         }
         public void BroadcastMessage(Message message)
         {
@@ -26,12 +29,9 @@ namespace PokedexChat.Data {
         }
         public Task<MessageList> GetMessages()
         {
-            var user = new User("George Spanos", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcs3igV0QK_ErQ4ub7yNUsBbiv9-YS0Lj4A&usqp=CAU");
-            for (var i = 0; i < 10; i++){
-                var newMessage = new Message(user, $"I sent a message {i}", DateTime.Now);
-                _messages.Add(newMessage);
-            }
-            return Task.FromResult(MessageList.Create(_messages));
+            var response = _client.GetMessages(new Proto.EMPTY());
+            return Task.FromResult(MessageList
+                .Create(response.Messages.Select(m => new Message(new User(m.User.Name, m.User.PictureUrl), m.Text, m.Timestamp.ToDateTime()))));
 
         }
         public Task<IMessage> GetNewMessage()

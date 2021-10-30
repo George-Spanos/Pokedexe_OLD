@@ -6,15 +6,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.19.1"/>
-        <PackageReference Include="Grpc.Net.Client" Version="2.40.0"/>
-        <PackageReference Include="Grpc.Net.Client.Web" Version="2.40.0"/>
+        <PackageReference Include="Google.Protobuf" Version="3.19.1" />
+        <PackageReference Include="Grpc.Net.Client" Version="2.40.0" />
+        <PackageReference Include="Grpc.Net.Client.Web" Version="2.40.0" />
         <PackageReference Include="Grpc.Tools" Version="2.41.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.11"/>
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.11" />
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,5 +24,10 @@
         <Compile Update="Message.cs">
             <DependentUpon>IMessage.cs</DependentUpon>
         </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Protos\message.proto" />
+      <Protobuf Include="Protos\message.proto" />
     </ItemGroup>
 </Project>
