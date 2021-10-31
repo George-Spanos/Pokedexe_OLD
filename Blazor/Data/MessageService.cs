@@ -5,17 +5,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
+using Microsoft.Extensions.Configuration;
 using Proto;
 namespace PokedexChat.Data {
     internal sealed class MessageService : IMessageService {
 
         private readonly GrpcChannel channel;
         private readonly Proto.MessageService.MessageServiceClient _client;
-        public MessageService()
+        private readonly IConfiguration _configuration;
+        public MessageService(IConfiguration configuration)
         {
+            _configuration = configuration;
             var httpHandler = new HttpClientHandler();
 
-            channel = GrpcChannel.ForAddress("https://localhost:8080",
+            channel = GrpcChannel.ForAddress(_configuration.GetSection("ApiUrl").Value,
             new GrpcChannelOptions
             {
                 HttpHandler = new GrpcWebHandler(httpHandler)
