@@ -1,11 +1,10 @@
-﻿namespace MessageBus.Common {
-    public interface ITableMessage {
-        string RowKey { get; set; }
+﻿using Azure.Data.Tables;
+namespace MessageBus.Common {
+    public interface ITableMessage : ITableEntity {
 
         string Text { get; set; }
 
         string UserEmail { get; set; }
-        string Timestamp { get; set; }
     }
 
 }

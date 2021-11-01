@@ -1,12 +1,22 @@
 ﻿syntax = "proto3";
 
+import "common.proto";
+
 option csharp_namespace = "Proto";
 
 package User;
+
+
 
 message User {
   string Name = 1;
   string Email = 2;
   string PictureUrl = 3;
 }
-
+message UserList {
+  repeated User users = 1;
+}
+service UserManager {
+  rpc RetrieveUsers (Common.EMPTY) returns (UserList);
+  rpc InsertUser (User) returns (Common.EMPTY);
+}

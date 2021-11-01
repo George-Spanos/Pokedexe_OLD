@@ -29,7 +29,7 @@ namespace MessageBus.Services {
             {
                 Id = m.RowKey,
                 Text = m.Text,
-                Timestamp = m.Timestamp,
+                Timestamp = m.Timestamp.ToString(),
             });
             var messageList = new MessageList();
             messageList.Value.Add(messages);

@@ -4,12 +4,12 @@ option csharp_namespace = "Proto";
 
 package Message;
 
-
-message EMPTY {}
+import "common.proto";
+import "user.proto";
 
 message Message {
   string id = 1;
-  string UserEmail = 2;
+  User.User User = 2;
   string Text = 3;
   string Timestamp = 5;
 }
@@ -17,7 +17,7 @@ message MessageList {
   repeated Message value = 1;
 }
 service MessageService {
-  rpc GetMessages(EMPTY) returns (MessageList);
-  rpc BroadcastMessage(Message) returns(EMPTY);
-  rpc GetNewMessage(EMPTY) returns (stream Message);
+  rpc GetMessages(Common.EMPTY) returns (MessageList);
+  rpc BroadcastMessage(Message) returns(Common.EMPTY);
+  rpc GetNewMessage(Common.EMPTY) returns (stream Message);
 }
