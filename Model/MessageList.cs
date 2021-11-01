@@ -8,7 +8,7 @@ namespace Model {
         private readonly IEnumerable<Message> _messages;
 
         public ImmutableList<ImmutableList<Message>> Value => _messages
-            .GroupWhile((previous, next) => previous.User.Email == next.User.Email)
+            .GroupWhile((previous, next) => previous.UserEmail == next.UserEmail)
             .Select(group => {
                 return group.Select(message => new Message(message)).ToImmutableList();
             })

@@ -5,11 +5,10 @@ option csharp_namespace = "Proto";
 package Message;
 
 import "common.proto";
-import "user.proto";
 
 message Message {
   string id = 1;
-  User.User User = 2;
+  string UserEmail = 2;
   string Text = 3;
   string Timestamp = 5;
 }

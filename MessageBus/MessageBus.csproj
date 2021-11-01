@@ -15,4 +15,10 @@
       <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Common\TableMessage.cs">
+        <DependentUpon>ITableMessage.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
