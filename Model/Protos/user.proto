@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+package User;
+
+message User {
+  string Name = 1;
+  string Email = 2;
+  string PictureUrl = 3;
+}
+

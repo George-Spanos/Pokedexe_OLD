@@ -9,10 +9,9 @@
     "postcss-cli": "^9.0.1",
     "tailwindcss": "^2.2.17"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
-    "buildcss": "postcss Blazor/wwwroot/css/app.scss -o Blazor/wwwroot/css/app.min.css"
+    "buildcss": "postcss Web/wwwroot/css/app.scss -o Web/wwwroot/css/app.min.css"
   },
   "author": "",
   "license": "ISC"

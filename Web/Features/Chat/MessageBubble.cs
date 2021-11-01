@@ -7,6 +7,6 @@ namespace PokedexChat.Features.Chat {
         public ImmutableList<Message> Messages { get; set; }
 
         [Parameter]
-        public User User { get; set; }
+        public string UserEmail { get; set; }
     }
 }
