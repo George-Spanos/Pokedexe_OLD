@@ -47,8 +47,8 @@
         <Compile Update="Shared\Auth\Login.cs">
             <DependentUpon>Login.razor</DependentUpon>
         </Compile>
-        <Compile Update="Data\MessageService.cs">
-            <DependentUpon>IMessageService.cs</DependentUpon>
+        <Compile Update="Data\DataService.cs">
+          <DependentUpon>IDataService.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 

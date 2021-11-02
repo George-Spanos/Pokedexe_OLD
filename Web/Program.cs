@@ -18,7 +18,7 @@ namespace PokedexChat {
 
             builder.Services.AddOidcAuthentication(options => { builder.Configuration.Bind("Authentication:Google", options.ProviderOptions); });
 
-            builder.Services.AddScoped<IMessageService, MessageService>();
+            builder.Services.AddScoped<IDataService, DataService>();
 
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");

@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using Azure;
-using Azure.Data.Tables;
-namespace MessageBus.Common {
-    internal class TableMessage : ITableMessage {
+namespace UserManager.Common {
+    public class AzureTableUser : ITableUser {
         public string PartitionKey { get; set; }
 
         public string RowKey { get; set; }
@@ -11,9 +10,10 @@ namespace MessageBus.Common {
 
         public ETag ETag { get; set; }
 
-        public string Text { get; set; }
-
         public string UserEmail { get; set; }
 
+        public string PictureUrl { get; set; }
+
+        public string Name { get; set; }
     }
 }

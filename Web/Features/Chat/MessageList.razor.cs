@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using PokedexChat.Data;
+using Proto;
 namespace PokedexChat.Features.Chat {
 
     public class MessageListBase : ComponentBase {
@@ -13,9 +15,9 @@ namespace PokedexChat.Features.Chat {
         private IJSRuntime Js { get; set; }
 
         [Inject]
-        private IMessageService MessageService { get; set; }
+        private IDataService MessageService { get; set; }
 
-        protected Model.MessageList Messages { get; set; }
+        protected IEnumerable<Message> Messages { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

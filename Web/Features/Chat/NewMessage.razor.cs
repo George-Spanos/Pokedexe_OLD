@@ -11,7 +11,7 @@ namespace PokedexChat.Features.Chat {
 
     public class NewMessageBase : ComponentBase {
         [Inject]
-        private IMessageService MessageService { get; set; }
+        private IDataService DataService { get; set; }
 
         [CascadingParameter]
         private Task<AuthenticationState> AuthenticationState { get; set; }
@@ -24,9 +24,9 @@ namespace PokedexChat.Features.Chat {
             {
                 Text = NewMessageForm.Text,
                 Timestamp = DateTime.Now.ToString(CultureInfo.InvariantCulture),
-                User = user.Email
+                UserEmail = user.Email
             };
-            MessageService.BroadcastMessage(message);
+            await DataService.BroadcastMessage(message);
         }
     }
 }
