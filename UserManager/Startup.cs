@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UserManager.Common;
+using UserManager.Services;
 
 namespace UserManager {
     public class Startup {
@@ -31,6 +32,7 @@ namespace UserManager {
                     .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
             }));
             services.Configure<StorageConfiguration>(_configuration.GetSection("StorageCredentials"));
+            services.AddScoped<IUserStoreService<AzureTableUser>, AzureTableStorageUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +46,7 @@ namespace UserManager {
             app.UseGrpcWeb();
             app.UseCors();
             app.UseEndpoints(endpoints => {
-                // endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb().RequireCors("AllowAll");
+                endpoints.MapGrpcService<UserManagerService>().EnableGrpcWeb().RequireCors("AllowAll");
 
                 endpoints.MapGet("/",
                 async context => {

@@ -18,8 +18,9 @@ namespace PokedexChat {
 
             builder.Services.AddOidcAuthentication(options => { builder.Configuration.Bind("Authentication:Google", options.ProviderOptions); });
 
+            // Blazor WebAssembly apps don't currently have a concept of DI scopes.
+            // Scoped-registered services behave like Singleton services.
             builder.Services.AddScoped<IDataService, DataService>();
-
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");

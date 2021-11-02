@@ -8,12 +8,10 @@ namespace PokedexChat.Data {
 
         IEnumerable<Message> Messages { get; set; }
 
-        Task<IEnumerable<Message>> GetMessages();
+
         Task BroadcastMessage(Message message);
 
         Task UpsertUser(User user);
-
-        Task<IEnumerable<User>> GetUsers();
 
     }
 }

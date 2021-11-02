@@ -15,13 +15,13 @@ namespace PokedexChat.Features.Chat {
         private IJSRuntime Js { get; set; }
 
         [Inject]
-        private IDataService MessageService { get; set; }
+        private IDataService DataService { get; set; }
 
-        protected IEnumerable<Message> Messages { get; set; }
+        protected IEnumerable<Message> Messages { get; private set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            Messages = await MessageService.GetMessages();
+            Messages = DataService.Messages;
         }
         protected override async void OnAfterRender(bool firstRender)
         {
