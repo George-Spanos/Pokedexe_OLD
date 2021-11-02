@@ -21,13 +21,18 @@ namespace PokedexChat.Data {
         {
             var httpHandler = new HttpClientHandler();
 
-            var channel = GrpcChannel.ForAddress(configuration.GetSection("ApiUrl").Value,
+            var messageChannel = GrpcChannel.ForAddress(configuration.GetSection("MessageBus:Uri").Value,
             new GrpcChannelOptions
             {
                 HttpHandler = new GrpcWebHandler(httpHandler)
             });
-            _messageService = new MessageService.MessageServiceClient(channel);
-            _userManager = new UserManager.UserManagerClient(channel);
+            var userManagerChannel = GrpcChannel.ForAddress(configuration.GetSection("UserManager:Uri").Value,
+            new GrpcChannelOptions
+            {
+                HttpHandler = new GrpcWebHandler(httpHandler)
+            });
+            _messageService = new MessageService.MessageServiceClient(messageChannel);
+            _userManager = new UserManager.UserManagerClient(userManagerChannel);
             Task.Run(GetMessages).Wait();
             Task.Run(GetUsers).Wait();
         }
