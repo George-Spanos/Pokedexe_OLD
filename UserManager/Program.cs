@@ -22,6 +22,7 @@ namespace UserManager {
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseSerilog();
                     webBuilder.UseStartup<Startup>();
                 });
     }
