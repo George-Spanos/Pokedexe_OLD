@@ -23,7 +23,6 @@ namespace UserManager {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            services.AddGrpcReflection();
             services.AddHttpClient();
             services.AddCors(o => o.AddPolicy("AllowAll",
             builder => {
@@ -48,9 +47,6 @@ namespace UserManager {
             app.UseCors();
             app.UseEndpoints(endpoints => {
                 endpoints.MapGrpcService<UserManagerService>().EnableGrpcWeb().RequireCors("AllowAll");
-                if (env.IsDevelopment()){
-                    endpoints.MapGrpcReflectionService();
-                }
                 endpoints.MapGet("/",
                 async context => {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
