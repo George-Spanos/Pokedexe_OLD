@@ -30,6 +30,7 @@ namespace UserManager.Services {
             }
             catch (RpcException exception){
                 Console.WriteLine("Failed to Fetch Users from Storage");
+                _logger.LogDebug(exception, "Failed to Fetch Users from Storage");
                 return new UserList();
             }
         }
