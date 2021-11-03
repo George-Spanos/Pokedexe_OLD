@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 namespace MessageBus {
     public class Program {
@@ -13,7 +12,6 @@ namespace MessageBus {
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
-                    webBuilder.ConfigureKestrel(options => options.ListenAnyIP(443, o => o.Protocols = HttpProtocols.Http2));
                     webBuilder.UseStartup<Startup>();
                 });
     }
