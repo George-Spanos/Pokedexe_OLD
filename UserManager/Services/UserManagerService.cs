@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -15,16 +16,22 @@ namespace UserManager.Services {
         }
         public override async Task<UserList> RetrieveUsers(EMPTY request, ServerCallContext context)
         {
-            var userList = new UserList();
-            foreach (var user in await _userStore.RetrieveAsync()){
-                userList.Users.Add(new User()
-                {
-                    Email = user.UserEmail,
-                    Name = user.Name,
-                    PictureUrl = user.PictureUrl
-                });
+            try{
+                var userList = new UserList();
+                foreach (var user in await _userStore.RetrieveAsync()){
+                    userList.Users.Add(new User()
+                    {
+                        Email = user.UserEmail,
+                        Name = user.Name,
+                        PictureUrl = user.PictureUrl
+                    });
+                }
+                return userList;
             }
-            return userList;
+            catch (RpcException exception){
+                Console.WriteLine("Failed to Fetch Users from Storage");
+                return new UserList();
+            }
         }
     }
 }
