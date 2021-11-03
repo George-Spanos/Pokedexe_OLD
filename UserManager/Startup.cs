@@ -22,7 +22,7 @@ namespace UserManager {
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc();
+            services.AddGrpc(options => options.EnableDetailedErrors = true);
             services.AddHttpClient();
             services.AddCors(o => o.AddPolicy("AllowAll",
             builder => {
