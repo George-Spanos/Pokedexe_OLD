@@ -19,7 +19,7 @@ namespace MessageBus {
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc();
+            services.AddGrpc(options => options.EnableDetailedErrors = true);
             services.AddHttpClient();
             services.AddResponseCompression(opts =>
             {

@@ -43,6 +43,7 @@ namespace UserManager {
             }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
             app.UseGrpcWeb();
             app.UseCors();
             app.UseEndpoints(endpoints => {
