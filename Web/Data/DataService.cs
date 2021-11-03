@@ -33,8 +33,6 @@ namespace PokedexChat.Data {
             });
             _messageService = new MessageService.MessageServiceClient(messageChannel);
             _userManager = new UserManager.UserManagerClient(userManagerChannel);
-            Task.Run(GetMessages).Wait();
-            Task.Run(GetUsers).Wait();
         }
         public async Task BroadcastMessage(Message message)
         {
@@ -44,18 +42,21 @@ namespace PokedexChat.Data {
         {
             throw new NotImplementedException();
         }
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task InitializeAsync()
+        {
+            await GetMessages();
+            await GetUsers();
+        }
+        private async Task GetUsers()
         {
             var users = await _userManager.RetrieveUsersAsync(new EMPTY());
             Users = users.Users.ToList();
-            return Users;
         }
 
-        public async Task<IEnumerable<Message>> GetMessages()
+        private async Task GetMessages()
         {
             var messageResponse = await _messageService.GetMessagesAsync(new EMPTY());
             Messages = messageResponse.Value.Select(m => new Message(m));
-            return Messages;
         }
         public Task<Message> GetNewMessage()
         {

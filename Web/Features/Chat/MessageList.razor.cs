@@ -1,31 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Model.Extensions;
 using PokedexChat.Data;
 using Proto;
 namespace PokedexChat.Features.Chat {
 
-    public class MessageListBase : ComponentBase {
+    public class MessageListBase : OwningComponentBase<IDataService> {
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationState { get; set; }
 
         [Inject]
         private IJSRuntime Js { get; set; }
 
-        [Inject]
         private IDataService DataService { get; set; }
 
         protected ImmutableList<ImmutableList<Message>> Messages { get; private set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await DataService.GetMessages();
-            await DataService.GetUsers();
+            DataService = ScopedServices.GetRequiredService<IDataService>();
+            
             Messages = DataService.Messages
                 .GroupWhile((next, previous) => next.UserEmail == previous.UserEmail)
                 .Select(m => m.ToImmutableList())
