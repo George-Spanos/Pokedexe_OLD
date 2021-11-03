@@ -22,8 +22,10 @@ namespace PokedexChat.Features.Chat {
 
         protected ImmutableList<ImmutableList<Message>> Messages { get; private set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
+            await DataService.GetMessages();
+            await DataService.GetUsers();
             Messages = DataService.Messages
                 .GroupWhile((next, previous) => next.UserEmail == previous.UserEmail)
                 .Select(m => m.ToImmutableList())

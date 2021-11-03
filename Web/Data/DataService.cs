@@ -17,7 +17,7 @@ namespace PokedexChat.Data {
 
         public IEnumerable<Message> Messages { get; set; }
 
-        public DataService(IConfiguration configuration)
+        private DataService(IConfiguration configuration)
         {
             var httpHandler = new HttpClientHandler();
 
@@ -44,20 +44,23 @@ namespace PokedexChat.Data {
         {
             throw new NotImplementedException();
         }
-        private async Task GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await _userManager.RetrieveUsersAsync(new EMPTY());
             Users = users.Users.ToList();
+            return Users;
         }
 
-        private async Task GetMessages()
+        public async Task<IEnumerable<Message>> GetMessages()
         {
             var messageResponse = await _messageService.GetMessagesAsync(new EMPTY());
             Messages = messageResponse.Value.Select(m => new Message(m));
+            return Messages;
         }
         public Task<Message> GetNewMessage()
         {
             throw new NotImplementedException();
         }
+
     }
 }
