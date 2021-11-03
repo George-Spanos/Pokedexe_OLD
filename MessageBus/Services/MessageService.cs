@@ -10,7 +10,7 @@ namespace MessageBus.Services {
     internal sealed class MessageService : Proto.MessageService.MessageServiceBase {
         private readonly ILogger<MessageService> _logger;
         private readonly IMessageStoreService _messageStore;
-        internal MessageService(ILogger<MessageService> logger, IMessageStoreService messageStore)
+        public MessageService(ILogger<MessageService> logger, IMessageStoreService messageStore)
         {
             _logger = logger;
             _messageStore = messageStore;

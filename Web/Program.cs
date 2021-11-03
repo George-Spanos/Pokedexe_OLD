@@ -20,10 +20,12 @@ namespace PokedexChat {
 
             // Blazor WebAssembly apps don't currently have a concept of DI scopes.
             // Scoped-registered services behave like Singleton services.
-            builder.Services.AddScoped<IDataService, DataService>();
+            
+            builder.Services.AddSingleton<IDataService, DataService>();
+            
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");
-
+            
             var host = builder.Build();
             var dataService = host.Services.GetRequiredService<IDataService>();
             await dataService.InitializeAsync();

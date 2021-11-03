@@ -17,7 +17,7 @@ namespace PokedexChat.Data {
 
         public IEnumerable<Message> Messages { get; set; }
 
-        private DataService(IConfiguration configuration)
+        public DataService(IConfiguration configuration)
         {
             var httpHandler = new HttpClientHandler();
 

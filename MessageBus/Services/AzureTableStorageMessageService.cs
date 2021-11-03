@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 namespace MessageBus.Services {
     internal sealed class AzureTableStorageMessageService : IMessageStoreService {
         private readonly StorageConfiguration _configuration;
-        internal AzureTableStorageMessageService(IOptions<StorageConfiguration> options)
+        public AzureTableStorageMessageService(IOptions<StorageConfiguration> options)
         {
             _configuration = options.Value;
         }

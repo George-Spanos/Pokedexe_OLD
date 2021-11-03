@@ -1,5 +1,5 @@
 namespace MessageBus.Common {
-    internal class StorageConfiguration {
+    public class StorageConfiguration {
 
         public string AccountUri { get; set; }
 

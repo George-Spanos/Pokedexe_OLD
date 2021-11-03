@@ -5,8 +5,9 @@ using PokedexChat.Data;
 using Proto;
 namespace PokedexChat.Features.Chat {
     public class MessageBubbleBase : ComponentBase {
+        
         [Inject]
-        private IDataService _dataService { get; set; }
+        protected IDataService DataService { get; set; }
 
         [Parameter]
         public ImmutableList<Message> Messages { get; set; }
@@ -16,7 +17,7 @@ namespace PokedexChat.Features.Chat {
 
         protected override void OnInitialized()
         {
-            _user = _dataService.Users.Single(user => user.Email == Messages.First().UserEmail);
+            _user = DataService.Users.Single(user => user.Email == Messages.First().UserEmail);
         }
     }
 }

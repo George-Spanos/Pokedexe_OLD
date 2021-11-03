@@ -8,7 +8,7 @@ namespace UserManager.Services {
         private readonly ILogger<UserManagerService> _logger;
         private readonly IUserStoreService<AzureTableUser> _userStore;
 
-        internal UserManagerService(ILogger<UserManagerService> logger, IUserStoreService<AzureTableUser> userStore)
+        public UserManagerService(ILogger<UserManagerService> logger, IUserStoreService<AzureTableUser> userStore)
         {
             _logger = logger;
             _userStore = userStore;
