@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using MessageBus.Common;
 using MessageBus.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 namespace MessageBus {
     public class Startup {
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -24,6 +21,11 @@ namespace MessageBus {
         {
             services.AddGrpc();
             services.AddHttpClient();
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                new[] { "application/octet-stream" });
+            });
             services.AddCors(o => o.AddPolicy("AllowAll",
             builder => {
                 builder.AllowAnyOrigin()
