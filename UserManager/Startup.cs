@@ -41,7 +41,7 @@ namespace UserManager {
             if (env.IsDevelopment()){
                 app.UseDeveloperExceptionPage();
             }
-
+        
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseGrpcWeb();
