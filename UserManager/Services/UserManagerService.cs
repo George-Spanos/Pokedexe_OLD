@@ -17,6 +17,7 @@ namespace UserManager.Services {
         }
         public override async Task<UserList> RetrieveUsers(EMPTY request, ServerCallContext context)
         {
+            _logger.LogInformation("Someone Fetched Some users");
             try{
                 var userList = new UserList();
                 foreach (var user in await _userStore.RetrieveAsync()){
