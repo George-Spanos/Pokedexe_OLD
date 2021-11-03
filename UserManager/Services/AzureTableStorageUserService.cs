@@ -34,7 +34,7 @@ namespace UserManager.Services {
         public async Task<Result<bool>> InsertOrUpdateAsync(AzureTableUser tableUser)
         {
             var tableClient = GetTableClient();
-            var user = await tableClient.QueryAsync<AzureTableUser>(filter: $"Email eq {tableUser.UserEmail}").FirstOrDefaultAsync();
+            var user = await tableClient.QueryAsync<AzureTableUser>(filter: $"Email eq {tableUser.Email}").FirstOrDefaultAsync();
 
             if (user != null){
                 var response = await tableClient.UpdateEntityAsync(tableUser, ETag.All, TableUpdateMode.Replace);

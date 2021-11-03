@@ -10,7 +10,7 @@ namespace UserManager.Common {
 
         public ETag ETag { get; set; }
 
-        public string UserEmail { get; set; }
+        public string Email { get; set; }
 
         public string PictureUrl { get; set; }
 

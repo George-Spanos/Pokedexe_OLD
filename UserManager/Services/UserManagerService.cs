@@ -20,12 +20,9 @@ namespace UserManager.Services {
             try{
                 var userList = new UserList();
                 foreach (var user in await _userStore.RetrieveAsync()){
-                    var json = JsonSerializer.Serialize(user);
-                    Console.Write(json);
-                    _logger.LogDebug(json);
                     userList.Users.Add(new User()
                     {
-                        Email = user.UserEmail,
+                        Email = user.Email,
                         Name = user.Name,
                         PictureUrl = user.PictureUrl
                     });
