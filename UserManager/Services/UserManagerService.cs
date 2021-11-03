@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -19,6 +20,9 @@ namespace UserManager.Services {
             try{
                 var userList = new UserList();
                 foreach (var user in await _userStore.RetrieveAsync()){
+                    var json = JsonSerializer.Serialize(user);
+                    Console.Write(json);
+                    _logger.LogDebug(json);
                     userList.Users.Add(new User()
                     {
                         Email = user.UserEmail,
@@ -29,9 +33,8 @@ namespace UserManager.Services {
                 return userList;
             }
             catch (RpcException exception){
-                Console.WriteLine("Failed to Fetch Users from Storage");
                 _logger.LogError(exception, "Failed to Fetch Users from Storage");
-                return new UserList();
+                throw new InvalidOperationException("Failed to Fetch Users from Storage");
             }
         }
     }
