@@ -8,9 +8,11 @@ namespace UserManager {
     public class Program {
         public static int Main(string[] args)
         {
+            var connectionString = "DefaultEndpointsProtocol=https;AccountName=pokedexestorage;AccountKey=9nx8W58vEFpMywuxiPP63VDSC2Y8NEGmo/8gKL/S1uz/d8kl8ZHQdQ6IdtaAAnvrM2eWfX1Jwnt4RTb69eBFpQ==;EndpointSuffix=core.windows.net";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
+                .WriteTo.AzureBlobStorage(connectionString, LogEventLevel.Information, null, "{yyyy}/{MM}/{dd}/log.txt")
                 .CreateBootstrapLogger();
             try{
                 Log.Information("Starting web host");
