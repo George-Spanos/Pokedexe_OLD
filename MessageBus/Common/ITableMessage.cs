@@ -4,7 +4,7 @@ namespace MessageBus.Common {
 
         string Text { get; set; }
 
-        string UserEmail { get; set; }
+        string UserSub { get; set; }
     }
 
 }

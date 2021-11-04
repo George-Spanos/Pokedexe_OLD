@@ -22,7 +22,7 @@ namespace MessageBus.Services {
                 Id = m.RowKey,
                 Text = m.Text,
                 Timestamp = m.Timestamp.ToString(),
-                UserEmail = m.UserEmail
+                UserSub = m.UserSub
             });
             var messageList = new MessageList();
             messageList.Value.Add(messages);

@@ -38,7 +38,7 @@ namespace UserManager.Services {
         public async Task<Result<bool>> InsertOrUpdateAsync(User user)
         {
             var tableClient = GetTableClient();
-            var tableUser = await tableClient.QueryAsync<AzureTableUser>($"Email eq {user.Email}").FirstOrDefaultAsync();
+            var tableUser = await tableClient.QueryAsync<AzureTableUser>($"Sub eq {user.Sub}").FirstOrDefaultAsync();
 
             if (tableUser != null){
                 _logger.LogInformation("User exists");
@@ -49,7 +49,7 @@ namespace UserManager.Services {
                 _logger.LogInformation("New User!");
                 var newTableUser = new AzureTableUser()
                 {
-                    Email = user.Email,
+                    Sub = user.Sub,
                     Name = user.Name,
                     PictureUrl = user.PictureUrl
                 };

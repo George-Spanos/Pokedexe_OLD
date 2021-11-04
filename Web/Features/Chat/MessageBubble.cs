@@ -17,7 +17,7 @@ namespace PokedexChat.Features.Chat {
 
         protected override void OnInitialized()
         {
-            _user = DataService.Users.Single(user => user.Email == Messages.First().UserEmail);
+            _user = DataService.Users.Single(user => user.Sub == Messages.First().UserSub);
         }
     }
 }

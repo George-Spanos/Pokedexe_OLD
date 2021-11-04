@@ -8,7 +8,7 @@ import "common.proto";
 
 message Message {
   string id = 1;
-  string UserEmail = 2;
+  string UserSub = 2;
   string Text = 3;
   string Timestamp = 5;
 }

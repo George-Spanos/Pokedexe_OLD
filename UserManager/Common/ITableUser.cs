@@ -1,7 +1,7 @@
 using Azure.Data.Tables;
 namespace UserManager.Common {
     public interface ITableUser : ITableEntity {
-        string Email { get; set; }
+        string Sub { get; set; }
 
         string PictureUrl { get; set; }
 

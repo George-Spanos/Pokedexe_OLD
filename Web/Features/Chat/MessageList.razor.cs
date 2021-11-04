@@ -27,7 +27,7 @@ namespace PokedexChat.Features.Chat {
         {
             if (DataService.Messages != null){
                 Messages = DataService.Messages
-                    .GroupWhile((next, previous) => next.UserEmail == previous.UserEmail)
+                    .GroupWhile((next, previous) => next.UserSub == previous.UserSub)
                     .Select(m => m.ToImmutableList())
                     .ToImmutableList();
             }

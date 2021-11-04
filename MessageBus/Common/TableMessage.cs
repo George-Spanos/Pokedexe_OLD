@@ -13,7 +13,7 @@ namespace MessageBus.Common {
 
         public string Text { get; set; }
 
-        public string UserEmail { get; set; }
+        public string UserSub { get; set; }
 
     }
 }

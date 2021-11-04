@@ -21,7 +21,7 @@ namespace UserManager.Services {
                 foreach (var user in await _userStore.RetrieveAsync()){
                     userList.Users.Add(new User()
                     {
-                        Email = user.Email,
+                        Sub = user.Sub,
                         Name = user.Name,
                         PictureUrl = user.PictureUrl
                     });

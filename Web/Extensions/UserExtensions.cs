@@ -8,7 +8,7 @@ namespace PokedexChat.Extensions {
         public static User ToAppUser(this ClaimsPrincipal user)
         {
             var name = user.Identity?.Name;
-            var email = user.Claims.SingleOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
+            var sub = user.Claims.SingleOrDefault(claim => claim.Type == "sub")?.Value;
             Console.WriteLine("User claims are");
             foreach (var claim in user.Claims){
                 Console.WriteLine($"{claim.Type} - {claim.Value}");
@@ -18,7 +18,7 @@ namespace PokedexChat.Extensions {
             {
                 Name = name,
                 PictureUrl = pictureUrl,
-                Email = email
+                Sub = sub
             };
             return newUser;
         }
