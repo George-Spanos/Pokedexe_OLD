@@ -38,9 +38,9 @@ namespace PokedexChat.Data {
         {
             await _messageService.BroadcastMessageAsync(message);
         }
-        public Task UpsertUser(User user)
+        public async Task UpsertUser(User user)
         {
-            throw new NotImplementedException();
+            await _userManager.InsertUserAsync(user);
         }
         public async Task InitializeAsync()
         {
