@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
@@ -46,6 +47,7 @@ namespace PokedexChat.Data {
         {
             await GetMessages();
             await GetUsers();
+            await SubscribeToNewMessages();
         }
         private async Task GetUsers()
         {
@@ -58,9 +60,12 @@ namespace PokedexChat.Data {
             var messageResponse = await _messageService.GetMessagesAsync(new EMPTY());
             Messages = messageResponse.Value.Select(m => new Message(m));
         }
-        public Task<Message> GetNewMessage()
+        private async Task SubscribeToNewMessages()
         {
-            throw new NotImplementedException();
+            using var call = _messageService.GetNewMessage(new EMPTY());
+            while (await call.ResponseStream.MoveNext(CancellationToken.None)){
+                var unused = Messages.Append(call.ResponseStream.Current);
+            }
         }
 
     }
