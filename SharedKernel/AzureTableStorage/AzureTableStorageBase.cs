@@ -14,9 +14,9 @@ namespace SharedKernel.AzureTableStorage {
             get
             {
                 var tableClient = new TableClient(
-                new Uri(_configuration["StorageCredentials:AccountUri"]),
-                _configuration["StorageCredentials:TableName"],
-                new TableSharedKeyCredential(_configuration["StorageCredentials:AccountName"], _configuration["StorageCredentials:AccountKey"]));
+                new Uri(_configuration["StorageAccountUri"]),
+                _configuration["StorageTableName"],
+                new TableSharedKeyCredential(_configuration["StorageAccountName"], _configuration["StorageAccountKey"]));
                 return tableClient;
             }
         }
