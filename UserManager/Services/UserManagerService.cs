@@ -19,7 +19,7 @@ namespace UserManager.Services {
             try{
                 var userList = new UserList();
                 foreach (var user in await _userStore.RetrieveAsync()){
-                    userList.Users.Add(new User()
+                    userList.Users.Add(new User
                     {
                         Sub = user.Sub,
                         Name = user.Name,

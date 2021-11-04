@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,9 +7,8 @@ using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Model.AzureTableStorage;
 using Proto;
+using SharedKernel.AzureTableStorage;
 using UserManager.Common;
 namespace UserManager.Services {
     internal sealed class AzureTableStorageUserService : AzureTableStorageBase, IUserStoreService<AzureTableUser> {
@@ -32,7 +30,7 @@ namespace UserManager.Services {
             }
             else{
                 _logger.LogInformation("New User!");
-                var newTableUser = new AzureTableUser()
+                var newTableUser = new AzureTableUser
                 {
                     Sub = user.Sub,
                     Name = user.Name,
