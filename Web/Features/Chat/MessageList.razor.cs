@@ -31,7 +31,6 @@ namespace PokedexChat.Features.Chat {
                     .Select(m => m.ToImmutableList())
                     .ToImmutableList();
             }
-
         }
         protected override async void OnAfterRender(bool firstRender)
         {

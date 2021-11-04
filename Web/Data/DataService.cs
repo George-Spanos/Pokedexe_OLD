@@ -47,7 +47,7 @@ namespace PokedexChat.Data {
         {
             await GetMessages();
             await GetUsers();
-            await SubscribeToNewMessages();
+            SubscribeToNewMessages();
         }
         private async Task GetUsers()
         {
@@ -60,10 +60,11 @@ namespace PokedexChat.Data {
             var messageResponse = await _messageService.GetMessagesAsync(new EMPTY());
             Messages = messageResponse.Value.Select(m => new Message(m));
         }
-        private async Task SubscribeToNewMessages()
+        public async void SubscribeToNewMessages()
         {
-            using var call = _messageService.GetNewMessage(new EMPTY());
-            while (await call.ResponseStream.MoveNext(CancellationToken.None)){
+            var cancellationToken = new CancellationToken();
+            using var call = _messageService.GetNewMessage(new EMPTY(), cancellationToken: cancellationToken);
+            while (await call.ResponseStream.MoveNext(cancellationToken)){
                 var unused = Messages.Append(call.ResponseStream.Current);
             }
         }
