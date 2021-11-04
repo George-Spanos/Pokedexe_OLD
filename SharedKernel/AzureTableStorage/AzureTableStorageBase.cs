@@ -20,5 +20,6 @@ namespace SharedKernel.AzureTableStorage {
                 return tableClient;
             }
         }
+        
     }
 }
