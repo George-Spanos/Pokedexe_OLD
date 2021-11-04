@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -10,7 +11,6 @@ namespace UserManager {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
                 .CreateBootstrapLogger();
             try{
                 Log.Information("Starting web host");
