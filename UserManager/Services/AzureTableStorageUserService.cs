@@ -6,43 +6,28 @@ using System.Threading.Tasks;
 using Ardalis.Result;
 using Azure;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Model.AzureTableStorage;
 using Proto;
 using UserManager.Common;
 namespace UserManager.Services {
-    internal sealed class AzureTableStorageUserService : IUserStoreService<AzureTableUser> {
+    internal sealed class AzureTableStorageUserService : AzureTableStorageBase, IUserStoreService<AzureTableUser> {
         private readonly ILogger<AzureTableStorageUserService> _logger;
-        private readonly StorageConfiguration _configuration;
-
-        public AzureTableStorageUserService(ILogger<AzureTableStorageUserService> logger, IOptions<StorageConfiguration> option)
-        {
-            _logger = logger;
-            _configuration = option.Value;
-        }
-        private TableClient GetTableClient()
-        {
-
-            var tableClient = new TableClient(
-            new Uri(_configuration.AccountUri),
-            _configuration.TableName,
-            new TableSharedKeyCredential(_configuration.AccountName, _configuration.AccountKey));
-            return tableClient;
-        }
 
         public async Task<IEnumerable<AzureTableUser>> RetrieveAsync()
         {
-            var users = await GetTableClient().QueryAsync<AzureTableUser>().ToListAsync();
+            var users = await Client.QueryAsync<AzureTableUser>().ToListAsync();
             return users;
         }
         public async Task<Result<bool>> InsertOrUpdateAsync(User user)
         {
-            var tableClient = GetTableClient();
-            var tableUser = await tableClient.QueryAsync<AzureTableUser>($"Sub eq {user.Sub}").FirstOrDefaultAsync();
+            var tableUser = await Client.QueryAsync<AzureTableUser>($"Sub eq {user.Sub}").FirstOrDefaultAsync();
 
             if (tableUser != null){
                 _logger.LogInformation("User exists");
-                var response = await tableClient.UpdateEntityAsync(tableUser, ETag.All, TableUpdateMode.Replace);
+                var response = await Client.UpdateEntityAsync(tableUser, ETag.All, TableUpdateMode.Replace);
                 return Result<bool>.Success(response.Status.Equals(HttpStatusCode.OK));
             }
             else{
@@ -53,10 +38,14 @@ namespace UserManager.Services {
                     Name = user.Name,
                     PictureUrl = user.PictureUrl
                 };
-                var response = await tableClient.AddEntityAsync(newTableUser);
+                var response = await Client.AddEntityAsync(newTableUser);
                 return Result<bool>.Success(response.Status.Equals(HttpStatusCode.OK));
             }
         }
 
+        public AzureTableStorageUserService(IConfiguration configuration, ILogger<AzureTableStorageUserService> logger) : base(configuration)
+        {
+            _logger = logger;
+        }
     }
 }

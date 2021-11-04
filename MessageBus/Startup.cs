@@ -33,7 +33,6 @@ namespace MessageBus {
                     .AllowAnyHeader()
                     .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
             }));
-            services.Configure<StorageConfiguration>(_configuration.GetSection("StorageCredentials"));
             services.AddScoped<IMessageStoreService, AzureTableStorageMessageService>();
 
         }
