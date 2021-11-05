@@ -12,6 +12,5 @@ namespace PokedexChat.Data {
 
         Task UpsertUser(User user);
         Task InitializeAsync();
-        Task SubscribeToNewMessages();
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
+using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using MessageBus.Common;
@@ -46,12 +47,18 @@ namespace MessageBus.Services {
             _chatMessageSubject.OnNext(message);
             return new EMPTY();
         }
-        public override async Task GetNewMessage(EMPTY request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
+        public override Task Subscribe(EMPTY request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            while (context.CancellationToken.IsCancellationRequested){
-                await Task.Delay(1000);
-                await _chatMessageSubject.Do(message => responseStream.WriteAsync(message)).ToTask();
+            async void OnNext(Message message)
+            {
+                _logger.LogWarning($"NEW MESSAGE ARRIVED {message?.Text}");
+                await responseStream.WriteAsync(message);
             }
+
+            return Task.Run(() => {
+                _chatMessageSubject.Do(OnNext).Subscribe();
+            },
+            context.CancellationToken);
 
         }
     }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +27,8 @@ namespace PokedexChat.Data {
             var messageChannel = GrpcChannel.ForAddress(configuration.GetSection("MessageBus:Uri").Value,
             new GrpcChannelOptions
             {
-                HttpHandler = new GrpcWebHandler(httpHandler)
+                HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, httpHandler),
+
             });
             var userManagerChannel = GrpcChannel.ForAddress(configuration.GetSection("UserManager:Uri").Value,
             new GrpcChannelOptions
@@ -47,7 +50,7 @@ namespace PokedexChat.Data {
         {
             await GetMessages();
             await GetUsers();
-            await SubscribeToNewMessages();
+            Subscribe();
         }
         private async Task GetUsers()
         {
@@ -60,16 +63,16 @@ namespace PokedexChat.Data {
             var messageResponse = await _messageService.GetMessagesAsync(new EMPTY());
             Messages = messageResponse.Value.Select(m => new Message(m));
         }
-        public async Task SubscribeToNewMessages()
+        private void Subscribe()
         {
-            Console.WriteLine("Subscribe init");
-            var cancellationToken = new CancellationToken();
-            using var call = _messageService.GetNewMessage(new EMPTY(), cancellationToken: cancellationToken);
-            while (await call.ResponseStream.MoveNext(cancellationToken)){
-                Console.WriteLine($"New Message {call.ResponseStream.Current}");
-                var unused = Messages.Append(call.ResponseStream.Current);
-            }
+            var cancellationToken = new CancellationTokenSource().Token;
+            var stream = _messageService.Subscribe(new EMPTY(), new Metadata(), DateTime.Now.AddMinutes(1).ToUniversalTime(), cancellationToken);
+            _ = Task.Run(async () => {
+                await foreach (var response in stream.ResponseStream.ReadAllAsync(cancellationToken)){
+                    Console.WriteLine("A new message " + response.Text);
+                }
+            },
+            cancellationToken);
         }
-
     }
 }

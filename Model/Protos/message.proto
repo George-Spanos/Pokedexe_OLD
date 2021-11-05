@@ -18,5 +18,5 @@ message MessageList {
 service MessageService {
   rpc GetMessages(Common.EMPTY) returns (MessageList);
   rpc BroadcastMessage(Message) returns(Common.EMPTY);
-  rpc GetNewMessage(Common.EMPTY) returns (stream Message);
+  rpc Subscribe(Common.EMPTY) returns (stream Message);
 }
