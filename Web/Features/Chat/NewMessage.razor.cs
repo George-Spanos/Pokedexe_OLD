@@ -16,10 +16,10 @@ namespace PokedexChat.Features.Chat {
         [CascadingParameter]
         private Task<AuthenticationState> AuthenticationState { get; set; }
 
-        protected readonly NewMessageForm NewMessageForm = new();
+        protected NewMessageForm NewMessageForm = new();
         protected async void Submit()
         {
-            NewMessageForm.Text = "";
+
             var user = (await AuthenticationState).User.ToAppUser();
             var message = new Message()
             {
@@ -28,6 +28,8 @@ namespace PokedexChat.Features.Chat {
                 UserSub = user.Sub
             };
             await DataService.BroadcastMessage(message);
+            NewMessageForm = new NewMessageForm();
+            StateHasChanged();
         }
     }
 }

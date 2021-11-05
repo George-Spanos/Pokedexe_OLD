@@ -38,15 +38,21 @@ namespace MessageBus.Services {
             var tableMessage = new TableMessage()
             {
                 Text = message.Text,
-                UserSub = message.UserSub
+                UserSub = message.UserSub,
+                PartitionKey = "1",
+                RowKey = Guid.NewGuid().ToString()
             };
             await _messageStore.InsertOrUpdateAsync(tableMessage);
             _chatMessageSubject.OnNext(message);
             return new EMPTY();
         }
-        public override Task GetNewMessage(EMPTY request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
+        public override async Task GetNewMessage(EMPTY request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            return _chatMessageSubject.Do(message => responseStream.WriteAsync(message)).ToTask();
+            while (context.CancellationToken.IsCancellationRequested){
+                await Task.Delay(1000);
+                await _chatMessageSubject.Do(message => responseStream.WriteAsync(message)).ToTask();
+            }
+
         }
     }
 }
