@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MessageBus.Common;
 using Microsoft.Extensions.Configuration;
+using Proto;
 using SharedKernel.AzureTableStorage;
 namespace MessageBus.Services {
     internal sealed class AzureTableStorageMessageService : AzureTableStorageBase, IMessageStoreService {
@@ -15,9 +16,9 @@ namespace MessageBus.Services {
             var messages = await Client.QueryAsync<TableMessage>().ToListAsync();
             return messages;
         }
-        public Task InsertOrUpdateAsync(ITableMessage tableMessage)
+        public async Task InsertOrUpdateAsync(TableMessage tableMessage)
         {
-            throw new NotImplementedException();
+            await Client.AddEntityAsync(tableMessage);
         }
 
     }
