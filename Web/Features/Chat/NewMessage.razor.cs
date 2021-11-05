@@ -19,6 +19,7 @@ namespace PokedexChat.Features.Chat {
         protected readonly NewMessageForm NewMessageForm = new();
         protected async void Submit()
         {
+            NewMessageForm.Text = "";
             var user = (await AuthenticationState).User.ToAppUser();
             var message = new Message()
             {
