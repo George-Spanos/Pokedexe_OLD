@@ -2,7 +2,7 @@
 using Azure;
 using Azure.Data.Tables;
 namespace MessageBus.Common {
-    internal class TableMessage : ITableMessage {
+    public class TableMessage : ITableMessage {
         public string PartitionKey { get; set; }
 
         public string RowKey { get; set; }

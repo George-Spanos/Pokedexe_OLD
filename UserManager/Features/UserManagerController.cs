@@ -1,24 +1,30 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proto;
 using UserManager.Common;
-namespace UserManager.Services {
-    public class UserManagerService : Proto.UserManager.UserManagerBase {
-        private readonly ILogger<UserManagerService> _logger;
-        private readonly IUserStoreService<AzureTableUser> _userStore;
+namespace UserManager.Features {
 
-        public UserManagerService(ILogger<UserManagerService> logger, IUserStoreService<AzureTableUser> userStore)
+    [ApiController]
+    [Route("[action]")]
+    public class UserManagerController : ControllerBase {
+        private readonly ILogger<UserManagerController> _logger;
+        private readonly IUserStoreService<AzureTableUser> _db;
+
+        public UserManagerController(ILogger<UserManagerController> logger, IUserStoreService<AzureTableUser> db)
         {
             _logger = logger;
-            _userStore = userStore;
+            _db = db;
         }
-        public override async Task<UserList> RetrieveUsers(EMPTY request, ServerCallContext context)
+
+        [HttpGet] public async Task<ActionResult<IEnumerable<User>>> RetrieveUsers()
         {
             try{
                 var userList = new UserList();
-                foreach (var user in await _userStore.RetrieveAsync()){
+                foreach (var user in await _db.RetrieveAsync()){
                     userList.Users.Add(new User
                     {
                         Sub = user.Sub,
@@ -26,20 +32,20 @@ namespace UserManager.Services {
                         PictureUrl = user.PictureUrl
                     });
                 }
-                return userList;
+                return new OkObjectResult(userList.Users.ToList());
             }
-            catch (RpcException exception){
+            catch (Exception exception){
                 _logger.LogError(exception, "Failed to Fetch Users from Storage");
                 throw new InvalidOperationException("Failed to Fetch Users from Storage");
             }
         }
-        public override async Task<EMPTY> InsertUser(User user, ServerCallContext context)
+        [HttpPost] public async Task<IActionResult> UpsertUser(User user)
         {
             try{
-                await _userStore.InsertOrUpdateAsync(user);
-                return new EMPTY();
+                await _db.InsertOrUpdateAsync(user);
+                return Ok();
             }
-            catch (RpcException exception){
+            catch (Exception exception){
                 const string message = "Failed to Upsert User";
                 _logger.LogError(exception, message);
                 throw new InvalidOperationException(message);

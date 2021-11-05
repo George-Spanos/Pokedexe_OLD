@@ -1,17 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Proto;
 namespace PokedexChat.Data {
     public interface IDataService {
 
-        IEnumerable<User> Users { get; set; }
-
         IEnumerable<Message> Messages { get; set; }
 
-        Task BroadcastMessage(Message message);
+        IEnumerable<User> Users { get; set; }
 
-        Task UpsertUser(User user);
-        Task InitializeAsync();
-        Task SubscribeToNewMessages();
+        IMessageDataService MessageDataService { get; set; }
+
+        IUserDataService UserDataService { get; set; }
     }
 }

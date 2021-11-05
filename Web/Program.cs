@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,8 +26,8 @@ namespace PokedexChat {
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");
             
             var host = builder.Build();
-            var dataService = host.Services.GetRequiredService<IDataService>();
-            await dataService.InitializeAsync();
+            // var dataService = host.Services.GetRequiredService<IDataService>();
+            // await dataService.InitializeAsync();
             await host.RunAsync();
         }
     }

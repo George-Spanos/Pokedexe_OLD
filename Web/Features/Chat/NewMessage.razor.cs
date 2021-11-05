@@ -27,7 +27,7 @@ namespace PokedexChat.Features.Chat {
                 Timestamp = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                 UserSub = user.Sub
             };
-            await DataService.BroadcastMessage(message);
+            await DataService.MessageDataService.BroadcastMessageAsync(message);
             NewMessageForm = new NewMessageForm();
             StateHasChanged();
         }

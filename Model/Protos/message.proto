@@ -15,8 +15,3 @@ message Message {
 message MessageList {
   repeated Message value = 1;
 }
-service MessageService {
-  rpc GetMessages(Common.EMPTY) returns (MessageList);
-  rpc BroadcastMessage(Message) returns(Common.EMPTY);
-  rpc GetNewMessage(Common.EMPTY) returns (stream Message);
-}

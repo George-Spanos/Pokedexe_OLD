@@ -19,19 +19,12 @@ namespace MessageBus {
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc(options => options.EnableDetailedErrors = true);
-            services.AddHttpClient();
-            services.AddResponseCompression(opts =>
-            {
-                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                new[] { "application/octet-stream" });
-            });
+            services.AddControllers();
             services.AddCors(o => o.AddPolicy("AllowAll",
             builder => {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+                    .AllowAnyHeader();
             }));
             services.AddScoped<IMessageStoreService, AzureTableStorageMessageService>();
 
@@ -46,15 +39,9 @@ namespace MessageBus {
 
             app.UseRouting();
             app.UseHttpsRedirection();
-            app.UseGrpcWeb();
             app.UseCors();
             app.UseEndpoints(endpoints => {
-                endpoints.MapGrpcService<MessageService>().EnableGrpcWeb().RequireCors("AllowAll");
-
-                endpoints.MapGet("/",
-                async context => {
-                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-                });
+                endpoints.MapControllers();
             });
         }
     }

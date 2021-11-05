@@ -14,7 +14,3 @@ message User {
 message UserList {
   repeated User users = 1;
 }
-service UserManager {
-  rpc RetrieveUsers (Common.EMPTY) returns (UserList);
-  rpc InsertUser (User) returns (Common.EMPTY);
-}

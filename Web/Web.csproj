@@ -12,7 +12,6 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Grpc.Net.Client.Web" Version="2.40.0" />
         <PackageReference Include="Grpc.Tools" Version="2.41.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -49,6 +48,12 @@
         </Compile>
         <Compile Update="Data\DataService.cs">
           <DependentUpon>IDataService.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Data\MessageDataService.cs">
+          <DependentUpon>IMessageDataService.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Data\UserDataService.cs">
+          <DependentUpon>IUserDataService.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
