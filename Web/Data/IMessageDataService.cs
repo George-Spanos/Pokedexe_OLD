@@ -8,7 +8,7 @@ namespace PokedexChat.Data {
         ISubject<Message> OnNewMessage { get; }
 
         Task DisposeConnection();
-        void InitializeConnection();
+        Task InitializeConnection();
         Task BroadcastMessageAsync(Message message);
         Task<IEnumerable<Message>> GetMessagesAsync();
     }

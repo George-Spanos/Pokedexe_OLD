@@ -31,14 +31,15 @@ namespace PokedexChat.Data {
             await _connection.DisposeAsync();
             OnNewMessage = new Subject<Message>();
         }
-        public void InitializeConnection()
+        public async Task InitializeConnection()
         {
             _connection = new HubConnectionBuilder().WithUrl($"{_configuration["MessageBus:Uri"]}/chat").Build();
             OnNewMessage = new Subject<Message>();
-            _connection.On<User, Message>(ChatEvent.ReceiveMessage,
-            (user, message) => {
+            _connection.On<Message>(ChatEvent.OnNewMessage,
+            (message) => {
                 OnNewMessage.OnNext(message);
             });
+            await _connection.StartAsync();
         }
         public async Task BroadcastMessageAsync(Message message)
         {
