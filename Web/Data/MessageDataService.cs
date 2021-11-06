@@ -39,11 +39,16 @@ namespace PokedexChat.Data {
             (message) => {
                 OnNewMessage.OnNext(message);
             });
+            _connection.KeepAliveInterval = TimeSpan.FromHours(2);
             await _connection.StartAsync();
         }
         public async Task BroadcastMessageAsync(Message message)
         {
+            if (_connection.State == HubConnectionState.Disconnected){
+                await _connection.StartAsync();
+            }
             await _connection.SendAsync(ChatEvent.BroadcastMessage, message);
+
         }
         public async Task<IEnumerable<Message>> GetMessagesAsync()
         {
