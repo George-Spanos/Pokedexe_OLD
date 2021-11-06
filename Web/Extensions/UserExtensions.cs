@@ -21,5 +21,10 @@ namespace PokedexChat.Extensions {
             };
             return newUser;
         }
+        public static string UserSub(this ClaimsPrincipal user)
+        {
+            var sub = user.Claims.SingleOrDefault(claim => claim.Type == "sub")?.Value;
+            return sub;
+        }
     }
 }

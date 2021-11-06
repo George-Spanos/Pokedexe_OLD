@@ -12,6 +12,7 @@ using Microsoft.JSInterop;
 using Model;
 using Model.Extensions;
 using PokedexChat.Data;
+using PokedexChat.Extensions;
 namespace PokedexChat.Features.Chat {
 
     public class MessageListBase : OwningComponentBase<IDataService> {
@@ -37,7 +38,7 @@ namespace PokedexChat.Features.Chat {
                     .Select(m => m.ToList())
                     .ToList();
             }
-            Subscription = DataService.MessageDataService.OnNewMessage.Do(async message => Console.WriteLine($"New Message {message.Text}")).Subscribe((message) => {
+            Subscription = DataService.MessageDataService.OnNewMessage.Do(message => Console.WriteLine($"New Message {message.Text}")).Subscribe(async (message) => {
                 var lastMessageBubble = Messages.LastOrDefault();
                 if (lastMessageBubble != null && lastMessageBubble.First().UserSub == message.UserSub){
                     lastMessageBubble.Add(message);
@@ -46,9 +47,9 @@ namespace PokedexChat.Features.Chat {
                     Messages.Add(new List<Message> { message });
                 }
                 StateHasChanged();
-                Task.Run(async () => {
+                if ((await AuthenticationState).User.UserSub() == message.UserSub){
                     await Js.InvokeVoidAsync("notify");
-                });
+                }
             });
         }
         protected override async void OnAfterRender(bool firstRender)
