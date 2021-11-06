@@ -34,7 +34,8 @@ namespace UserManager.Services {
                 {
                     Sub = user.Sub,
                     Name = user.Name,
-                    PictureUrl = user.PictureUrl
+                    PictureUrl = user.PictureUrl,
+                    PartitionKey = "1"
                 };
                 var response = await Client.AddEntityAsync(newTableUser);
                 return Result<bool>.Success(response.Status.Equals(HttpStatusCode.OK));
