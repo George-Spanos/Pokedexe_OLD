@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using MessageBus.Common;
 using MessageBus.Services;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,7 @@ namespace MessageBus {
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+
             services.AddScoped<IMessageStoreService, AzureTableStorageMessageService>();
         }
 
@@ -40,7 +42,8 @@ namespace MessageBus {
             if (env.IsDevelopment()){
                 app.UseDeveloperExceptionPage();
             }
-
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseCors(AllowAllPolicy);

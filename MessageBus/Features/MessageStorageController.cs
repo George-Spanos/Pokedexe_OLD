@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using MessageBus.Common;
@@ -25,7 +26,7 @@ namespace MessageBus.Features {
             var messages = (await _messageStore.RetrieveAsync()).Select(m => new Message
             {
                 Text = m.Text,
-                Timestamp = m.Timestamp?.UtcDateTime.ToLocalTime().ToLongDateString(),
+                Timestamp = m.Timestamp?.UtcDateTime.ToLocalTime().ToString(CultureInfo.InvariantCulture),
                 UserSub = m.UserSub
             });
             return Ok(messages);
