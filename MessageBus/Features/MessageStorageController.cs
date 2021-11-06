@@ -30,18 +30,5 @@ namespace MessageBus.Features {
             });
             return Ok(messages);
         }
-
-        [HttpPost] public async Task<IActionResult> BroadcastMessage(Message message)
-        {
-            var tableMessage = new TableMessage()
-            {
-                Text = message.Text,
-                UserSub = message.UserSub,
-                PartitionKey = "1",
-                RowKey = Guid.NewGuid().ToString()
-            };
-            await _messageStore.InsertOrUpdateAsync(tableMessage);
-            return Ok();
-        }
     }
 }

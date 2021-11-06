@@ -1,7 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using MQTTnet.AspNetCore.Extensions;
 using Serilog;
 using Serilog.Events;
 namespace MessageBus {
@@ -35,14 +34,6 @@ namespace MessageBus {
                     configuration
                         .ReadFrom.Configuration(context.Configuration))
                 .ConfigureWebHostDefaults(webBuilder => {
-                    webBuilder.UseKestrel(options => {
-                        options.ListenAnyIP(1833,
-                        l => {
-                            l.UseMqtt();
-                            l.UseHttps();
-                        });// MQTT pipeline
-                        options.ListenAnyIP(8080, listenOptions => listenOptions.UseHttps());// Default HTTP pipeline
-                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

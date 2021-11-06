@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Model;
@@ -11,15 +14,35 @@ namespace PokedexChat.Data {
         private readonly HttpClient _httpClient;
         private readonly ILogger<MessageDataService> _logger;
         private readonly IConfiguration _configuration;
+        private HubConnection _connection;
+
+        public ISubject<Message> OnNewMessage { get; private set; }
+
         public MessageDataService(HttpClient httpClient, ILogger<MessageDataService> logger, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _logger = logger;
             _configuration = configuration;
+
         }
-        public Task BroadcastMessageAsync(Message message)
+
+        public async Task DisposeConnection()
         {
-            throw new NotImplementedException();
+            await _connection.DisposeAsync();
+            OnNewMessage = new Subject<Message>();
+        }
+        public void InitializeConnection()
+        {
+            _connection = new HubConnectionBuilder().WithUrl($"{_configuration["MessageBus:Uri"]}/chat").Build();
+            OnNewMessage = new Subject<Message>();
+            _connection.On<User, Message>(ChatEvent.ReceiveMessage,
+            (user, message) => {
+                OnNewMessage.OnNext(message);
+            });
+        }
+        public async Task BroadcastMessageAsync(Message message)
+        {
+            await _connection.SendAsync(ChatEvent.BroadcastMessage, message);
         }
         public async Task<IEnumerable<Message>> GetMessagesAsync()
         {

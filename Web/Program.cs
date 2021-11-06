@@ -30,7 +30,6 @@ namespace PokedexChat {
             builder.Services.AddScoped<IMessageDataService, MessageDataService>();
             builder.Services.AddScoped<IUserDataService, UserDataService>();
             builder.Services.AddScoped<IDataService, DataService>();
-            builder.Services.AddSingleton<StreamingService>();
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");
         }

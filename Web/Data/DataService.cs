@@ -16,6 +16,7 @@ namespace PokedexChat.Data {
         {
             Messages = (await MessageDataService.GetMessagesAsync());
             Users = (await UserDataService.RetrieveUsersAsync());
+            MessageDataService.InitializeConnection();
         }
 
         public DataService(IMessageDataService messageDataService, IUserDataService userDataService)
