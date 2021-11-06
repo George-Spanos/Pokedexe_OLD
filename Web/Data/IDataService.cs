@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Model;
 namespace PokedexChat.Data {
@@ -9,10 +10,12 @@ namespace PokedexChat.Data {
 
         IEnumerable<User> Users { get; set; }
 
-        IMessageDataService MessageDataService { get; set; }
+        Task BroadcastMessageAsync(Message message);
 
-        IUserDataService UserDataService { get; set; }
+        ISubject<Message> OnNewMessage { get; }
 
+        Task InsertUserAsync(User user);
         Task InitializeAsync();
+        Task Dispose();
     }
 }

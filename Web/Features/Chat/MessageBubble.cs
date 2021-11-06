@@ -13,12 +13,12 @@ namespace PokedexChat.Features.Chat {
         [Parameter]
         public IList<Message> Messages { get; set; }
 
-        protected User _user { get; set; }
+        protected User User { get; set; }
 
 
         protected override void OnInitialized()
         {
-            _user = DataService.Users.Single(user => user.Sub == Messages.First().UserSub);
+            User = DataService.Users.Single(user => user.Sub == Messages.First().UserSub);
         }
     }
 }

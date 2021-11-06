@@ -15,7 +15,7 @@ namespace PokedexChat.Features.Chat {
         {
             var user = (await AuthenticationState).User.ToAppUser();
            
-            await DataService.UserDataService.InsertUserAsync(user);
+            await DataService.InsertUserAsync(user);
         }
     }
 }

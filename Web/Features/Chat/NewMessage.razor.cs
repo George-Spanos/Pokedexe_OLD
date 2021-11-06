@@ -30,7 +30,7 @@ namespace PokedexChat.Features.Chat {
                 Timestamp = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                 UserSub = user.Sub
             };
-            await DataService.MessageDataService.BroadcastMessageAsync(message);
+            await DataService.BroadcastMessageAsync(message);
             NewMessageForm = new NewMessageForm();
             StateHasChanged();
             await FocusInput();

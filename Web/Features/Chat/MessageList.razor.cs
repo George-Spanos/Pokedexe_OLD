@@ -38,7 +38,7 @@ namespace PokedexChat.Features.Chat {
                     .Select(m => m.ToList())
                     .ToList();
             }
-            Subscription = DataService.MessageDataService.OnNewMessage.Do(message => Console.WriteLine($"New Message {message.Text}")).Subscribe(async (message) => {
+            Subscription = DataService.OnNewMessage.Do(message => Console.WriteLine($"New Message {message.Text}")).Subscribe(async (message) => {
                 var lastMessageBubble = Messages.LastOrDefault();
                 if (lastMessageBubble != null && lastMessageBubble.First().UserSub == message.UserSub){
                     lastMessageBubble.Add(message);
@@ -58,7 +58,7 @@ namespace PokedexChat.Features.Chat {
         }
         protected override void Dispose(bool disposing)
         {
-            DataService.MessageDataService.DisposeConnection();
+            DataService.Dispose();
             Subscription.Dispose();
         }
     }
