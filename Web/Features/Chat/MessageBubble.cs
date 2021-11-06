@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
+using Model;
 using PokedexChat.Data;
-using Proto;
 namespace PokedexChat.Features.Chat {
     public class MessageBubbleBase : ComponentBase {
         

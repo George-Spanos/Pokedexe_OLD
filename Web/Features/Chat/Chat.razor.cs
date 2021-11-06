@@ -14,12 +14,8 @@ namespace PokedexChat.Features.Chat {
         protected override async Task OnInitializedAsync()
         {
             var user = (await AuthenticationState).User.ToAppUser();
-            /*  TODO 
-             *  Upsert user fails because it needs to be refactored to match every user,
-             *  with the "sub" property, not the email.
-             */
-
-            // await DataService.UpsertUser(user);
+           
+            await DataService.UserDataService.InsertUserAsync(user);
         }
     }
 }

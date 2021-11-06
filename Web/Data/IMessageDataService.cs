@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Proto;
+using Model;
 namespace PokedexChat.Data {
     public interface IMessageDataService {
         Task BroadcastMessageAsync(Message message);
-        Task<MessageList> GetMessagesAsync();
+        Task<IEnumerable<Message>> GetMessagesAsync();
     }
 }

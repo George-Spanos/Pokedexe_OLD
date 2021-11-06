@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Proto;
+using Model;
 namespace PokedexChat.Data {
     public interface IDataService {
 
@@ -12,5 +12,7 @@ namespace PokedexChat.Data {
         IMessageDataService MessageDataService { get; set; }
 
         IUserDataService UserDataService { get; set; }
+
+        Task InitializeAsync();
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using Proto;
-
+using Model;
 namespace PokedexChat.Extensions {
     public static class UserExtensions {
         public static User ToAppUser(this ClaimsPrincipal user)

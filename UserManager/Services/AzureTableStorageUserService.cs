@@ -7,7 +7,7 @@ using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Proto;
+using Model;
 using SharedKernel.AzureTableStorage;
 using UserManager.Common;
 namespace UserManager.Services {
@@ -21,7 +21,7 @@ namespace UserManager.Services {
         }
         public async Task<Result<bool>> InsertOrUpdateAsync(User user)
         {
-            var tableUser = await Client.QueryAsync<AzureTableUser>($"Sub eq {user.Sub}").FirstOrDefaultAsync();
+            var tableUser = await Client.QueryAsync<AzureTableUser>($"Sub eq '{user.Sub}'").FirstOrDefaultAsync();
 
             if (tableUser != null){
                 _logger.LogInformation("User exists");

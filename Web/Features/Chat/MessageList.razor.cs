@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
+using Model;
 using Model.Extensions;
 using PokedexChat.Data;
-using Proto;
 namespace PokedexChat.Features.Chat {
 
     public class MessageListBase : OwningComponentBase<IDataService> {

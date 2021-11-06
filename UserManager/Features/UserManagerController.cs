@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Proto;
+using Model;
 using UserManager.Common;
 namespace UserManager.Features {
 
@@ -23,23 +23,22 @@ namespace UserManager.Features {
         [HttpGet] public async Task<ActionResult<IEnumerable<User>>> RetrieveUsers()
         {
             try{
-                var userList = new UserList();
-                foreach (var user in await _db.RetrieveAsync()){
-                    userList.Users.Add(new User
+                var userList = (await _db.RetrieveAsync()).Select(user => new User
                     {
                         Sub = user.Sub,
                         Name = user.Name,
                         PictureUrl = user.PictureUrl
-                    });
-                }
-                return new OkObjectResult(userList.Users.ToList());
+                    })
+                    .ToList();
+                return new OkObjectResult(userList);
             }
             catch (Exception exception){
                 _logger.LogError(exception, "Failed to Fetch Users from Storage");
                 throw new InvalidOperationException("Failed to Fetch Users from Storage");
             }
         }
-        [HttpPost] public async Task<IActionResult> UpsertUser(User user)
+        [HttpPost] public async Task<IActionResult> UpsertUser(
+            User user)
         {
             try{
                 await _db.InsertOrUpdateAsync(user);

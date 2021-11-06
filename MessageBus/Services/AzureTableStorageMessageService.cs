@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MessageBus.Common;
 using Microsoft.Extensions.Configuration;
-using Proto;
 using SharedKernel.AzureTableStorage;
 namespace MessageBus.Services {
     internal sealed class AzureTableStorageMessageService : AzureTableStorageBase, IMessageStoreService {

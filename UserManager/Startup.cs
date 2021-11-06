@@ -7,17 +7,11 @@ using UserManager.Common;
 using UserManager.Services;
 namespace UserManager {
     public class Startup {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        // private readonly IConfiguration _configuration;
-        // public Startup(IConfiguration configuration)
-        // {
-        //     _configuration = configuration;
-        // }
+        private const string ALLOW_ALL_POLICY = "AllowAll";
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddCors(o => o.AddPolicy("AllowAll",
+            services.AddCors(o => o.AddPolicy(ALLOW_ALL_POLICY,
             builder => {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -36,7 +30,7 @@ namespace UserManager {
 
             app.UseRouting();
             app.UseHttpsRedirection();
-            app.UseCors();
+            app.UseCors(ALLOW_ALL_POLICY);
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });

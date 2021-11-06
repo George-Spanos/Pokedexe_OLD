@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Proto;
+using System.Threading.Tasks;
+using Model;
 namespace PokedexChat.Data {
     public sealed class DataService : IDataService {
 
@@ -10,6 +11,12 @@ namespace PokedexChat.Data {
         public IMessageDataService MessageDataService { get; set; }
 
         public IUserDataService UserDataService { get; set; }
+
+        public async Task InitializeAsync()
+        {
+            Messages = (await MessageDataService.GetMessagesAsync());
+            Users = (await UserDataService.RetrieveUsersAsync());
+        }
 
         public DataService(IMessageDataService messageDataService, IUserDataService userDataService)
         {

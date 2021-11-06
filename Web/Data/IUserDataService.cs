@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Proto;
+using Model;
 namespace PokedexChat.Data {
     public interface IUserDataService {
         Task InsertUserAsync(User user);
-        Task<UserList> RetrieveUsersAsync();
+        Task<IEnumerable<User>> RetrieveUsersAsync();
     }
 }

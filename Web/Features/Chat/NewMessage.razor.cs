@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Proto;
+using Model;
 using PokedexChat.Data;
 using PokedexChat.Extensions;
 namespace PokedexChat.Features.Chat {
@@ -21,7 +20,7 @@ namespace PokedexChat.Features.Chat {
         {
 
             var user = (await AuthenticationState).User.ToAppUser();
-            var message = new Message()
+            var message = new Message
             {
                 Text = NewMessageForm.Text,
                 Timestamp = DateTime.Now.ToString(CultureInfo.InvariantCulture),
