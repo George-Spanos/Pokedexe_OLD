@@ -25,7 +25,7 @@ namespace MessageBus.Features {
             var messages = (await _messageStore.RetrieveAsync()).Select(m => new Message
             {
                 Text = m.Text,
-                Timestamp = m.Timestamp.ToString(),
+                Timestamp = m.Timestamp?.ToLocalTime().ToString(),
                 UserSub = m.UserSub
             });
             return Ok(messages);
