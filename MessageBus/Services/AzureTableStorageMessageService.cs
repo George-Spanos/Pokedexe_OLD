@@ -12,9 +12,9 @@ namespace MessageBus.Services {
         public async Task<IEnumerable<ITableMessage>> RetrieveAsync()
         {
             var messages = await Client.QueryAsync<TableMessage>()
-                .OrderBy(message => message.Timestamp)
+                .OrderByDescending(message => message.Timestamp)
                 .Take(10).ToListAsync();
-            return messages;
+            return messages.OrderBy(m => m.Timestamp);
         }
         public async Task InsertOrUpdateAsync(TableMessage tableMessage)
         {
