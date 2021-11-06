@@ -31,7 +31,7 @@ namespace PokedexChat.Features.Chat {
 
         protected override void OnInitialized()
         {
-            if (DataService.Messages != null){
+            if (DataService.Messages != null && DataService.Messages.Any()){
                 Messages = DataService.Messages
                     .GroupWhile((next, previous) => next.UserSub == previous.UserSub)
                     .Select(m => m.ToList())
