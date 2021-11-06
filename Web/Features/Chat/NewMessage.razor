@@ -1,6 +1,6 @@
 ﻿@inherits NewMessageBase;
 <EditForm Model="@NewMessageForm" OnValidSubmit="@Submit" class="flex flex-row justify-self-end gap-4" autocomplete="off">
-    <InputText class="border-2 rounded border-pink-300 py-2 px-3 flex-grow" id="text"
+    <InputText class="border-2 rounded border-pink-300 py-2 px-3 flex-grow" id="new-message"
                @bind-Value="NewMessageForm.Text"/>
 
     <button type="submit">
