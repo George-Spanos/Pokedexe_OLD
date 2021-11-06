@@ -7,17 +7,17 @@ using UserManager.Common;
 using UserManager.Services;
 namespace UserManager {
     public class Startup {
-        private const string ALLOW_ALL_POLICY = "AllowAll";
+        private const string AllowAllPolicy = "AllowAll";
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
-            services.AddCors(o => o.AddPolicy(ALLOW_ALL_POLICY,
+            services.AddControllers();
+            services.AddCors(o => o.AddPolicy(AllowAllPolicy,
             builder => {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
-            services.AddControllers();
+
             services.AddScoped<IUserStoreService<AzureTableUser>, AzureTableStorageUserService>();
         }
 
@@ -30,7 +30,7 @@ namespace UserManager {
 
             app.UseRouting();
             app.UseHttpsRedirection();
-            app.UseCors(ALLOW_ALL_POLICY);
+            app.UseCors(AllowAllPolicy);
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
