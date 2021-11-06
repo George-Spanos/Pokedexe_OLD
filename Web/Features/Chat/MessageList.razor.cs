@@ -47,7 +47,7 @@ namespace PokedexChat.Features.Chat {
                     Messages.Add(new List<Message> { message });
                 }
                 StateHasChanged();
-                if ((await AuthenticationState).User.UserSub() == message.UserSub){
+                if ((await AuthenticationState).User.UserSub() != message.UserSub){
                     await Js.InvokeVoidAsync("notify");
                 }
             });
