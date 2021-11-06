@@ -37,7 +37,7 @@ namespace PokedexChat.Features.Chat {
                     .Select(m => m.ToList())
                     .ToList();
             }
-            Subscription = DataService.MessageDataService.OnNewMessage.Do(message => Console.WriteLine($"New Message {message.Text}")).Subscribe((message) => {
+            Subscription = DataService.MessageDataService.OnNewMessage.Do(async message => Console.WriteLine($"New Message {message.Text}")).Subscribe((message) => {
                 var lastMessageBubble = Messages.LastOrDefault();
                 if (lastMessageBubble != null && lastMessageBubble.First().UserSub == message.UserSub){
                     lastMessageBubble.Add(message);
@@ -46,6 +46,9 @@ namespace PokedexChat.Features.Chat {
                     Messages.Add(new List<Message> { message });
                 }
                 StateHasChanged();
+                Task.Run(async () => {
+                    await Js.InvokeVoidAsync("notify");
+                });
             });
         }
         protected override async void OnAfterRender(bool firstRender)
