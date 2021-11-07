@@ -50,6 +50,7 @@ namespace PokedexChat.Features.Chat {
                 if ((await AuthenticationState).User.UserSub() != message.UserSub){
                     await Js.InvokeVoidAsync("notify");
                 }
+
             });
         }
         protected override async void OnAfterRender(bool firstRender)

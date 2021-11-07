@@ -5,5 +5,6 @@ window.focusInput = function (id) {
     document.getElementById(id).focus();
 }
 window.notify = function () {
-    document.getElementById('notification').play()
+    var audio = new Audio('./notification.wav');
+    audio.play();
 }
