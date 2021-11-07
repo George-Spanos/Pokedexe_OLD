@@ -39,7 +39,7 @@ namespace PokedexChat.Data {
             (message) => {
                 OnNewMessage.OnNext(message);
             });
-            _connection.KeepAliveInterval = TimeSpan.FromHours(2);
+            _connection.KeepAliveInterval = TimeSpan.FromSeconds(20);
             await _connection.StartAsync();
         }
         public async Task BroadcastMessageAsync(Message message)
