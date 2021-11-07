@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  usermanager:
+    container_name: pokedexe_usermanager
+    image: pokedexe/usermanager:latest
+    ports:
+      - '8090:80'
+    environment:
+      - StorageAccountUri=https://pokedexestorage.table.core.windows.net
+      - StorageAccountName=pokedexestorage
+      - StorageAccountKey=9nx8W58vEFpMywuxiPP63VDSC2Y8NEGmo/8gKL/S1uz/d8kl8ZHQdQ6IdtaAAnvrM2eWfX1Jwnt4RTb69eBFpQ==
+      - StorageTableName=Users
+      
+  messagebus:
+    container_name: pokedexe_message_bus
+    image: pokedexe/messagebus:latest
+    ports:
+      - '8080:80'
+    environment:
+      - StorageAccountUri=https://pokedexestorage.table.core.windows.net
+      - StorageAccountName=pokedexestorage
+      - StorageAccountKey=9nx8W58vEFpMywuxiPP63VDSC2Y8NEGmo/8gKL/S1uz/d8kl8ZHQdQ6IdtaAAnvrM2eWfX1Jwnt4RTb69eBFpQ==
+      - StorageTableName=Messages
