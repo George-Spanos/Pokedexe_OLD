@@ -24,6 +24,7 @@ namespace PokedexChat {
 
             builder.Services.AddOidcAuthentication(options => {
                 builder.Configuration.Bind("Authentication:Google", options.ProviderOptions);
+                
             });
 
             // Blazor WebAssembly apps don't currently have a concept of DI scopes.
