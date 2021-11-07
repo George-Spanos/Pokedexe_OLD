@@ -22,7 +22,9 @@ namespace PokedexChat {
         {
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddOidcAuthentication(options => { builder.Configuration.Bind("Authentication:Google", options.ProviderOptions); });
+            builder.Services.AddOidcAuthentication(options => {
+                builder.Configuration.Bind("Authentication:Google", options.ProviderOptions);
+            });
 
             // Blazor WebAssembly apps don't currently have a concept of DI scopes.
             // Scoped-registered services behave like Singleton services.
