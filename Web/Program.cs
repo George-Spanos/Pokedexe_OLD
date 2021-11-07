@@ -36,8 +36,8 @@ namespace PokedexChat {
         private static async Task StartUpOperations(WebAssemblyHostBuilder builder)
         {
             var host = builder.Build();
-            var dataService = host.Services.GetRequiredService<IDataService>();
-            await dataService.InitializeAsync();
+            // var dataService = host.Services.GetRequiredService<IDataService>();
+            // await dataService.InitializeAsync();
             await host.RunAsync();
         }
 

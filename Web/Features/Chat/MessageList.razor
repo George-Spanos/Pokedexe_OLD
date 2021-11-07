@@ -1,11 +1,6 @@
 ﻿@inherits MessageListBase;
-@if (Messages is not null){
-    <div class="flex flex-col gap-3 flex-grow message-groups">
-        @foreach (var userMessageGroup in Messages){
-            <MessageBubble Messages=@userMessageGroup/>
-        }
-    </div>
-}
-else{
-    <Loading/>
-}
+<div class="flex flex-col gap-3 flex-grow message-groups">
+    @foreach (var userMessageGroup in Messages){
+        <MessageBubble Messages=@userMessageGroup/>
+    }
+</div>
