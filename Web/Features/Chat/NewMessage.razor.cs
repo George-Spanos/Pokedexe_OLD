@@ -24,6 +24,7 @@ namespace PokedexChat.Features.Chat {
         {
 
             var user = (await AuthenticationState).User.ToAppUser();
+            if (string.IsNullOrEmpty(NewMessageForm.Text)) return;
             var message = new Message
             {
                 Text = NewMessageForm.Text,
