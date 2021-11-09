@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-    
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
-        <Exec Command="node -v" />
-        <Exec Command="npm run buildcss" />
+        <Exec Command="node -v"/>
+        <Exec Command="npm run buildcss"/>
     </Target>
 
     <PropertyGroup>
@@ -10,26 +10,26 @@
         <RootNamespace>PokedexChat</RootNamespace>
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <PackageReference Include="Grpc.Tools" Version="2.41.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.11" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.11" />
-        <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
-        <PackageReference Include="System.Reactive" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.11"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.11"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.11" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.11"/>
+        <PackageReference Include="System.Net.Http.Json" Version="5.0.0"/>
+        <PackageReference Include="System.Reactive" Version="5.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
-        <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
-        <_ContentIncludedByDefault Remove="wwwroot\icons\profile.svg" />
-        <_ContentIncludedByDefault Remove="Shared\Icons\UserCircle.razor" />
-        <_ContentIncludedByDefault Remove="Authentication\Authentication.razor" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\icons\profile.svg"/>
+        <_ContentIncludedByDefault Remove="Shared\Icons\UserCircle.razor"/>
+        <_ContentIncludedByDefault Remove="Authentication\Authentication.razor"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -46,13 +46,13 @@
             <DependentUpon>Login.razor</DependentUpon>
         </Compile>
         <Compile Update="Data\DataService.cs">
-          <DependentUpon>IDataService.cs</DependentUpon>
+            <DependentUpon>IDataService.cs</DependentUpon>
         </Compile>
         <Compile Update="Data\MessageDataService.cs">
-          <DependentUpon>IMessageDataService.cs</DependentUpon>
+            <DependentUpon>IMessageDataService.cs</DependentUpon>
         </Compile>
         <Compile Update="Data\UserDataService.cs">
-          <DependentUpon>IUserDataService.cs</DependentUpon>
+            <DependentUpon>IUserDataService.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
@@ -66,21 +66,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Common" />
-        <Folder Include="Features" />
+        <Folder Include="Common"/>
+        <Folder Include="Features"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Model\Model.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Microsoft.AspNetCore.SignalR.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\5.0.11\Microsoft.AspNetCore.SignalR.Core.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\5.0.11\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
-      </Reference>
+        <ProjectReference Include="..\Model\Model.csproj"/>
     </ItemGroup>
 
 </Project>

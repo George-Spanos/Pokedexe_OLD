@@ -1,9 +1,11 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using MessageBus.Common;
 using MessageBus.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +44,12 @@ namespace MessageBus {
             if (env.IsDevelopment()){
                 app.UseDeveloperExceptionPage();
             }
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("el-GR");
-            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("el-GR");
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(new CultureInfo("el-GR")),
+                SupportedCultures = new List<CultureInfo> { new("el-GR") },
+                SupportedUICultures = new List<CultureInfo> { new("el-GR") }
+            });
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseCors(AllowAllPolicy);

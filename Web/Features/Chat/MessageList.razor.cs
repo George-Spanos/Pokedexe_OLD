@@ -46,11 +46,11 @@ namespace PokedexChat.Features.Chat {
                 else{
                     Messages.Add(new List<Message> { message });
                 }
-                StateHasChanged();
+
                 if ((await AuthenticationState).User.UserSub() != message.UserSub){
                     await Js.InvokeVoidAsync("notify");
                 }
-
+                StateHasChanged();
             });
         }
         protected override async void OnAfterRender(bool firstRender)
